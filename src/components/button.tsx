@@ -4,7 +4,7 @@ export function Button(): JSX.Element {
     const [count, setCount] = useState<number>(1);
 
     const handleClick = () => {
-        setCount(count + 1);
+        setCount(count + 2);
     };
 
     return (
