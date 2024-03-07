@@ -1,11 +1,12 @@
+import { FC } from "react";
 import { Button } from "./components/button";
 
-function App(): JSX.Element {
+const App: FC = () => {
     return (
         <div>
             <Button />
         </div>
     );
-}
+};
 
 export default App;
