@@ -14,10 +14,10 @@ export const Button: FC = () => {
     });
 
     const handleClick = () => {
-        setCount(count + 1);
-
         const newX: number = Math.random() * (window.innerWidth - 200);
-        const newY: number = Math.random() * (window.innerHeight - 200);
+        const newY: number = Math.random() * (window.innerHeight - 400);
+
+        setCount(count + 1);
         setImagePosition({ x: newX, y: newY });
     };
 
