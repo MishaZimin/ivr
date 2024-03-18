@@ -1,5 +1,6 @@
 import React, { useRef, useState, useCallback, FC } from "react";
 import Webcam from "react-webcam";
+import { ScrollGalary } from "./scroll-galary";
 
 type IVideoConstraints = {
     width: number;
@@ -16,28 +17,40 @@ const videoConstraints: IVideoConstraints = {
 export const StendCamera: FC = () => {
     const webcamRef = useRef<any>(null);
     const [url, setUrl] = useState<string | null>(null);
+    const [photos, setPhotos] = useState<string[]>([]);
 
     const capturePhoto = useCallback(async () => {
         if (webcamRef.current) {
             const imageSrc = webcamRef.current.getScreenshot();
             setUrl(imageSrc);
+
+            setPhotos((prevNames) => [imageSrc, ...prevNames]);
+
+            // console.log(photos[0]);
         }
     }, [webcamRef]);
 
-    // const onUserMedia: any = (e: any) => {
-    //     console.log(e.mediaStream);
-    // };
+    const saveFile = async (blob: any) => {
+        const a = document.createElement("a");
+        a.download = "my-file.txt";
+        a.href = URL.createObjectURL(blob);
+        a.addEventListener("click", (e) => {
+            setTimeout(() => URL.revokeObjectURL(a.href), 30 * 1000);
+        });
+        a.click();
+    };
 
     return (
         <>
             <div className="min-h-full flex items-center justify-center">
-                <div className="min-w-80 my-10 p-4 w-1/2 bg-white shadow-lg rounded-lg">
+                <div className="min-w-80 my-8 p-4 w-1/2 bg-white shadow-lg rounded-lg">
                     <Webcam
                         className="w-full rounded-md shadow-sm"
                         ref={webcamRef}
                         audio={false}
                         screenshotFormat="image/jpeg"
                         videoConstraints={videoConstraints}
+                        mirrored={true}
                         // onUserMedia={onUserMedia}
                     />
                     <div className="mt-4 w-1/2">
@@ -53,7 +66,7 @@ export const StendCamera: FC = () => {
                             />
                         </button>
                         <button
-                            onClick={() => setUrl(null)}
+                            onClick={() => setPhotos([])}
                             className="w-5/12 h-full max-w-12 bg-white text-black px-1 py-1 rounded-md shadow-lg"
                         >
                             <img
@@ -64,15 +77,9 @@ export const StendCamera: FC = () => {
                             />
                         </button>
                     </div>
-                    {url && (
-                        <div className="mt-10">
-                            <img
-                                className="w-full rounded-md shadow-sm"
-                                src={url}
-                                alt="Screenshot"
-                            />
-                        </div>
-                    )}
+                    {/* <button onClick={() => saveFile(url)}> save file </button> */}
+
+                    <ScrollGalary photos={photos} />
                 </div>
             </div>
         </>
