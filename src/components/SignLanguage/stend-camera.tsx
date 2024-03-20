@@ -16,6 +16,7 @@ const videoConstraints: IVideoConstraints = {
 
 export const StendCamera: FC = () => {
     const webcamRef = useRef<any>(null);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [url, setUrl] = useState<string | null>(null);
     const [photos, setPhotos] = useState<string[]>([]);
 
@@ -30,15 +31,15 @@ export const StendCamera: FC = () => {
         }
     }, [webcamRef]);
 
-    const saveFile = async (blob: any) => {
-        const a = document.createElement("a");
-        a.download = "my-file.txt";
-        a.href = URL.createObjectURL(blob);
-        a.addEventListener("click", (e) => {
-            setTimeout(() => URL.revokeObjectURL(a.href), 30 * 1000);
-        });
-        a.click();
-    };
+    // const saveFile = async (blob: any) => {
+    //     const a = document.createElement("a");
+    //     a.download = "my-file.txt";
+    //     a.href = URL.createObjectURL(blob);
+    //     a.addEventListener("click", (e) => {
+    //         setTimeout(() => URL.revokeObjectURL(a.href), 30 * 1000);
+    //     });
+    //     a.click();
+    // };
 
     return (
         <>
