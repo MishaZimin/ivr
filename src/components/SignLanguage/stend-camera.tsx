@@ -26,27 +26,15 @@ export const StendCamera: FC = () => {
       setUrl(imageSrc);
 
       setPhotos((prevNames) => [imageSrc, ...prevNames]);
-
-      // console.log(photos[0]);
     }
   }, [webcamRef]);
-
-  // const saveFile = async (blob: any) => {
-  //     const a = document.createElement("a");
-  //     a.download = "my-file.txt";
-  //     a.href = URL.createObjectURL(blob);
-  //     a.addEventListener("click", (e) => {
-  //         setTimeout(() => URL.revokeObjectURL(a.href), 30 * 1000);
-  //     });
-  //     a.click();
-  // };
 
   return (
     <>
       <div className="flex items-center justify-center min-h-full">
         <div className="w-1/2 p-4 my-8 bg-white rounded-lg shadow-lg min-w-80">
           <Webcam
-            className="w-full mb-4 rounded-md shadow-sm"
+            className="mb-4 rounded-md shadow-sm max-h-[500px]"
             ref={webcamRef}
             audio={false}
             screenshotFormat="image/jpeg"
@@ -54,7 +42,7 @@ export const StendCamera: FC = () => {
             mirrored={true}
             // onUserMedia={onUserMedia}
           />
-          <div className="w-1/2 mb-4">
+          <div className="w-1/2">
             <button
               onClick={capturePhoto}
               className="w-5/12 h-full px-1 py-1 mr-2 text-black bg-white shadow-lg rounded-xl max-w-12">
@@ -78,7 +66,7 @@ export const StendCamera: FC = () => {
           </div>
           {/* <button onClick={() => saveFile(url)}> save file </button> */}
 
-          <ScrollGalary photos={photos} />
+          {photos.length > 0 ? <ScrollGalary photos={photos} /> : null}
         </div>
       </div>
     </>

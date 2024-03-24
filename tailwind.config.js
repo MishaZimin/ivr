@@ -2,7 +2,12 @@
 module.exports = {
   content: ["./src/**/*.{html,js,ts,tsx,jsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        monserrat: "Montserrat",
+        kanit: "Kanit",
+      },
+    },
   },
   plugins: [],
 };

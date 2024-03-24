@@ -3,7 +3,11 @@ import { FC } from "react";
 export const EasyLanguage: FC = () => {
   return (
     <>
-      <p>Easy Language</p>
+      <div className="flex h-screen">
+        <div className="m-auto">
+          <p>easy language</p>
+        </div>
+      </div>
     </>
   );
 };
