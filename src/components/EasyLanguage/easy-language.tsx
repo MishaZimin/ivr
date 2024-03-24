@@ -1,9 +1,9 @@
 import { FC } from "react";
 
 export const EasyLanguage: FC = () => {
-    return (
-        <>
-            <p>Easy Language</p>
-        </>
-    );
+  return (
+    <>
+      <p>Easy Language</p>
+    </>
+  );
 };

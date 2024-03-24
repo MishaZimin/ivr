@@ -11,21 +11,21 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
-    document.getElementById("root") as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
-    <React.StrictMode>
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Welcome />} />
-                <Route path="/selection" element={<SelectionLanguage />} />
+  <React.StrictMode>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Welcome />} />
+        <Route path="/selection" element={<SelectionLanguage />} />
 
-                <Route path="/easy" element={<EasyLanguage />} />
-                <Route path="/text" element={<TextLanguage />} />
-                <Route path="/sign" element={<SignLanguage />} />
-            </Routes>
-        </BrowserRouter>
-    </React.StrictMode>
+        <Route path="/easy" element={<EasyLanguage />} />
+        <Route path="/text" element={<TextLanguage />} />
+        <Route path="/sign" element={<SignLanguage />} />
+      </Routes>
+    </BrowserRouter>
+  </React.StrictMode>
 );
 
 reportWebVitals();

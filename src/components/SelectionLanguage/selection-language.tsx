@@ -2,35 +2,30 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 
 export const SelectionLanguage: FC = () => {
-    return (
-        <>
-            <div className="flex justify-center mt-10">
-                <div>
-                    <p className=" text-center mb-5">
-                        Выберите способ взыимодействия
-                    </p>
-                    <div className="flex gap-5">
-                        <Link
-                            to="/easy"
-                            className="bg-white text-black px-5 py-2 rounded-md shadow-lg"
-                        >
-                            Ясный язык
-                        </Link>
-                        <Link
-                            to="/sign"
-                            className="bg-white text-black px-5 py-2 rounded-md shadow-lg"
-                        >
-                            Жестовый язык
-                        </Link>
-                        <Link
-                            to="/text"
-                            className="bg-white text-black px-5 py-2 rounded-md shadow-lg"
-                        >
-                            Текст
-                        </Link>
-                    </div>
-                </div>
-            </div>
-        </>
-    );
+  return (
+    <>
+      <div className="flex h-screen">
+        <div className="m-auto ">
+          <p className="mb-6 text-center">Выберите способ взаимодействия</p>
+          <div className="flex gap-10">
+            <Link
+              to="/easy"
+              className="w-auto px-6 py-4 text-black bg-white rounded-md shadow-lg">
+              Ясный язык
+            </Link>
+            <Link
+              to="/sign"
+              className="w-auto px-6 py-4 text-black bg-white rounded-md shadow-lg">
+              Жестовый язык
+            </Link>
+            <Link
+              to="/text"
+              className="w-auto px-6 py-4 text-black bg-white rounded-md shadow-lg">
+              Текст
+            </Link>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
