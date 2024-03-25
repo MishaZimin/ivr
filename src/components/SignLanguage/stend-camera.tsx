@@ -45,7 +45,7 @@ export const StendCamera: FC = () => {
           <div className="w-1/2">
             <button
               onClick={capturePhoto}
-              className="w-5/12 h-full px-1 py-1 mr-2 text-black bg-white shadow-lg rounded-xl max-w-12">
+              className="w-5/12 h-full px-1 py-1 mr-2 text-black transition duration-200 transform bg-white shadow-lg hover:scale-105 rounded-xl max-w-12">
               <img
                 src={
                   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz_gMleXQ-082cZXv130AZcfwg1nwT4aL6RvFLUFQDZpr7euSarRDVOKLJJiDSzeB7nas&usqp=CAU"
@@ -55,7 +55,7 @@ export const StendCamera: FC = () => {
             </button>
             <button
               onClick={() => setPhotos([])}
-              className="w-5/12 h-full px-1 py-1 text-black bg-white rounded-md shadow-lg max-w-12">
+              className="w-5/12 h-full px-1 py-1 text-black transition duration-200 transform bg-white rounded-md shadow-lg hover:scale-105 max-w-12">
               <img
                 src={
                   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw2AefZSiAdqlUdu-WJEJPoDNFsKnfA1YN0Q&usqp=CAU"

@@ -8,19 +8,19 @@ interface DataItem {
 const data: DataItem[] = [
   {
     id: 1,
-    name: "ok",
+    name: "ok 1",
   },
   {
     id: 2,
-    name: "aaa",
+    name: "oao",
   },
   {
     id: 3,
-    name: "abc",
+    name: "ok 3",
   },
   {
     id: 4,
-    name: "cb",
+    name: "aa",
   },
 ];
 
@@ -31,15 +31,15 @@ export const Search: FC = () => {
 
   return (
     <>
-      <div className="w-full text-center border-black border-spacing-1">
+      <div className="w-1/2 m-auto text-center border-black border-spacing-1">
         <input
           type="text"
           placeholder="Search..."
-          className="w-1/2 border-2 border-black p-[5px] rounded-md"
+          className="w-full border-2 border-silver focus:outline-none focus:border-2 focus:border-black p-[5px] rounded-md "
           onChange={(e) => setQuery(e.target.value)}
         />
 
-        <ul className="mt-[20px]">
+        <ul className="mt-[20px] text-left">
           {data
             .filter((item) => item.name.includes(query))
             .map((item) => (
