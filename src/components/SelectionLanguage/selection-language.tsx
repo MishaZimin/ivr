@@ -6,7 +6,9 @@ export const SelectionLanguage: FC = () => {
     <>
       <div className="flex h-screen">
         <div className="m-auto ">
-          <p className="mb-6 text-center">Выберите способ взаимодействия</p>
+          <p className="mb-6 text-2xl text-center">
+            Выберите способ взаимодействия
+          </p>
           <div className="flex gap-10">
             <Link
               to="/easy"
