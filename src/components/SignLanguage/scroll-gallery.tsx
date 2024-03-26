@@ -8,7 +8,7 @@ export const ScrollGalary: FC<IPhotosItem> = ({ photos }) => {
   return (
     <>
       <div className="w-full mt-4 overflow-x-auto rounded-md">
-        <div className="flex space-x-8 rounded-md">
+        <div className="flex space-x-4 rounded-md">
           {photos.map((element: string, index: number) => (
             <div key={index} className="flex-shrink-0">
               <img

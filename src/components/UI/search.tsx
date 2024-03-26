@@ -31,15 +31,15 @@ export const Search: FC = () => {
 
   return (
     <>
-      <div className="w-1/2 m-auto text-center border-black border-spacing-1">
+      <div className="w-full shadow-lg rounded-xl">
         <input
           type="text"
           placeholder="Search..."
-          className="w-full border-2 border-silver focus:outline-none focus:border-2 focus:border-black p-[5px] rounded-md "
+          className="w-full px-4 py-2 rounded-xl "
           onChange={(e) => setQuery(e.target.value)}
         />
 
-        <ul className="mt-[20px] text-left">
+        <ul className="py-3 text-left pl-4">
           {data
             .filter((item) => item.name.includes(query))
             .map((item) => (
