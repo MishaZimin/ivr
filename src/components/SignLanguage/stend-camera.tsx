@@ -1,6 +1,7 @@
 import React, { useRef, useState, useCallback, FC } from "react";
 import Webcam from "react-webcam";
 import { ScrollGalary } from "./scroll-gallery";
+import { useReactMediaRecorder } from "react-media-recorder";
 
 type IVideoConstraints = {
   width: number;
@@ -14,16 +15,23 @@ const videoConstraints: IVideoConstraints = {
   facingMode: "user",
 };
 
+const CAMERA_ICON =
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz_gMleXQ-082cZXv130AZcfwg1nwT4aL6RvFLUFQDZpr7euSarRDVOKLJJiDSzeB7nas&usqp=CAU";
+const DELETE_ICON =
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw2AefZSiAdqlUdu-WJEJPoDNFsKnfA1YN0Q&usqp=CAU";
+
 export const StendCamera: FC = () => {
   const webcamRef = useRef<any>(null);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [url, setUrl] = useState<string | null>(null);
+  const [video, setVideo] = useState<any>("");
   const [photos, setPhotos] = useState<string[]>([]);
+
+  const { status, startRecording, stopRecording, mediaBlobUrl } =
+    useReactMediaRecorder({ video: true, audio: false });
 
   const capturePhoto = useCallback(async () => {
     if (webcamRef.current) {
       const imageSrc = webcamRef.current.getScreenshot();
-      setUrl(imageSrc);
 
       setPhotos((prevNames) => [imageSrc, ...prevNames]);
     }
@@ -33,7 +41,8 @@ export const StendCamera: FC = () => {
 
   return (
     <>
-      <div className="w-full p-4 bg-white rounded-lg shadow-lg min-w-80">
+      <div className="w-full p-4 bg-white rounded-lg shadow-lg min-w-80 ">
+        <p>status: {status}</p>
         <Webcam
           className="mb-4 rounded-md shadow-sm max-h-[500px]"
           ref={webcamRef}
@@ -41,36 +50,62 @@ export const StendCamera: FC = () => {
           screenshotFormat="image/jpeg"
           videoConstraints={videoConstraints}
           mirrored={true}
-          // onUserMedia={onUserMedia}
         />
-        <div className="w-1/2">
+
+        {/* {mediaBlobUrl ? <a href={mediaBlobUrl}> link </a> : null} */}
+
+        <div className="flex items-center w-3/4">
+          <button
+            className="h-full px-3 py-3 mr-2 text-black transition duration-200 transform bg-white rounded-md shadow-lg hover:scale-105 "
+            onClick={() => {
+              startRecording();
+            }}>
+            Start Rec
+          </button>
+          <button
+            className="h-full px-3 py-3 mr-2 text-black transition duration-200 transform bg-white rounded-md shadow-lg hover:scale-105 "
+            onClick={() => {
+              stopRecording();
+              setVideo(mediaBlobUrl);
+            }}>
+            Stop Rec
+          </button>
           <button
             onClick={capturePhoto}
-            className="w-5/12 h-full px-1 py-1 mr-2 text-black transition duration-200 transform bg-white shadow-lg hover:scale-105 rounded-md max-w-12">
-            <img
-              src={
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz_gMleXQ-082cZXv130AZcfwg1nwT4aL6RvFLUFQDZpr7euSarRDVOKLJJiDSzeB7nas&usqp=CAU"
-              }
-              alt="camera"
-            />
+            className="w-5/12 h-full px-1 py-1 mr-2 text-black transition duration-200 transform bg-white rounded-md shadow-lg hover:scale-105 max-w-12">
+            <img src={CAMERA_ICON} alt="camera" />
           </button>
           <button
             onClick={() => {
               setPhotos([]);
+              setVideo("");
               console.log(photos);
             }}
             className="w-5/12 h-full px-1 py-1 text-black transition duration-200 transform bg-white rounded-md shadow-lg hover:scale-105 max-w-12">
-            <img
-              src={
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw2AefZSiAdqlUdu-WJEJPoDNFsKnfA1YN0Q&usqp=CAU"
-              }
-              alt="delete"
-            />
+            <img src={DELETE_ICON} alt="delete" />
           </button>
         </div>
-        {/* <button onClick={() => saveFile(url)}> save file </button> */}
 
-        {photos.length > 0 ? <ScrollGalary photos={photos} /> : null}
+        {video ? (
+          <div className="flex-shrink-0 mt-5 ">
+            <div className="mb-4">
+              <a href={video}>video</a>
+            </div>
+            <video
+              className="mb-4 rounded-md shadow-sm max-h-[500px] max-w-[355px]"
+              src={video}
+              controls
+              autoPlay
+            />
+          </div>
+        ) : null}
+
+        {photos.length > 0 ? (
+          <div className="mt-2 ">
+            <p className="">photos</p>
+            <ScrollGalary photos={photos} />
+          </div>
+        ) : null}
       </div>
     </>
   );

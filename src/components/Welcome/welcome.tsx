@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Link } from "react-router-dom";
+import { Button } from "../UI/button-link";
 
 export const Welcome: FC = () => {
   return (
@@ -10,11 +10,7 @@ export const Welcome: FC = () => {
             Помощь для людей с нарушением слуха
           </h1>
           <div className="flex justify-center gap-10">
-            <Link
-              className="px-6 py-4 text-center transition duration-200 transform bg-white rounded-md shadow-lg hover:scale-105"
-              to="/selection">
-              Начать
-            </Link>
+            <Button text="Начать" to="/selection" />
           </div>
         </div>
       </div>

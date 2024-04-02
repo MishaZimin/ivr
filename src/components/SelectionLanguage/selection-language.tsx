@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Link } from "react-router-dom";
+import { Button } from "../UI/button-link";
 
 export const SelectionLanguage: FC = () => {
   return (
@@ -10,21 +10,9 @@ export const SelectionLanguage: FC = () => {
             Выберите способ взаимодействия
           </h1>
           <div className="flex justify-center gap-10">
-            <Link
-              to="/easy"
-              className="w-auto px-6 py-4 text-black transition duration-200 transform bg-white rounded-md shadow-lg hover:scale-105">
-              Ясный язык
-            </Link>
-            <Link
-              to="/sign"
-              className="w-auto px-6 py-4 text-black transition duration-200 transform bg-white rounded-md shadow-lg hover:scale-105">
-              Жестовый язык
-            </Link>
-            <Link
-              to="/text"
-              className="w-auto px-6 py-4 text-black transition duration-200 transform bg-white rounded-md shadow-lg hover:scale-105">
-              Текст
-            </Link>
+            <Button text="Ясный язык" to="/easy" />
+            <Button text="Жестовый язык" to="/sign" />
+            <Button text="Текст" to="/text" />
           </div>
         </div>
       </div>
