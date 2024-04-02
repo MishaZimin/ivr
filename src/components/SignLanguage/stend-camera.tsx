@@ -23,7 +23,7 @@ const DELETE_ICON =
 export const StendCamera: FC = () => {
   const webcamRef = useRef<any>(null);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [video, setVideo] = useState<any>("");
+  const [video, setVideo] = useState<boolean>(false);
   const [photos, setPhotos] = useState<string[]>([]);
 
   const { status, startRecording, stopRecording, mediaBlobUrl } =
@@ -66,7 +66,7 @@ export const StendCamera: FC = () => {
             className="h-full px-3 py-3 mr-2 text-black transition duration-200 transform bg-white rounded-md shadow-lg hover:scale-105 "
             onClick={() => {
               stopRecording();
-              setVideo(mediaBlobUrl);
+              setVideo(true);
             }}>
             Stop Rec
           </button>
@@ -78,7 +78,8 @@ export const StendCamera: FC = () => {
           <button
             onClick={() => {
               setPhotos([]);
-              setVideo("");
+              setVideo(false);
+
               console.log(photos);
             }}
             className="w-5/12 h-full px-1 py-1 text-black transition duration-200 transform bg-white rounded-md shadow-lg hover:scale-105 max-w-12">
@@ -89,11 +90,11 @@ export const StendCamera: FC = () => {
         {video ? (
           <div className="flex-shrink-0 mt-5 ">
             <div className="mb-4">
-              <a href={video}>video</a>
+              <a href={mediaBlobUrl ?? undefined}>video</a>
             </div>
             <video
               className="mb-4 rounded-md shadow-sm max-h-[500px] max-w-[355px]"
-              src={video}
+              src={mediaBlobUrl ?? undefined}
               controls
               autoPlay
             />

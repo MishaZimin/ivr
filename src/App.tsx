@@ -13,4 +13,4 @@ const App: FC = () => {
 
 export default App;
 
-//https://ivr-murex.vercel.app/
+//https://ivr-urfu.vercel.app/
