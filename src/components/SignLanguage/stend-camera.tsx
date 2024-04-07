@@ -22,7 +22,7 @@ const DELETE_ICON =
 
 export const StendCamera: FC = () => {
   const webcamRef = useRef<any>(null);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const [video, setVideo] = useState<boolean>(false);
   const [photos, setPhotos] = useState<string[]>([]);
 
@@ -42,7 +42,7 @@ export const StendCamera: FC = () => {
   return (
     <>
       <div className="w-full p-4 bg-white rounded-lg shadow-lg min-w-80 ">
-        <p>status: {status}</p>
+        <p>rec status: {status}</p>
         <Webcam
           className="mb-4 rounded-md shadow-sm max-h-[500px]"
           ref={webcamRef}
@@ -51,8 +51,6 @@ export const StendCamera: FC = () => {
           videoConstraints={videoConstraints}
           mirrored={true}
         />
-
-        {/* {mediaBlobUrl ? <a href={mediaBlobUrl}> link </a> : null} */}
 
         <div className="flex items-center w-3/4">
           <button

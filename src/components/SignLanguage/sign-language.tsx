@@ -4,8 +4,6 @@ import { StendCamera } from "./stend-camera";
 import { Search } from "./../UI/search";
 import { Button } from "../UI/button-link";
 
-// import { RecordView } from "./record-video";
-
 export const SignLanguage: FC = () => {
   return (
     <>
@@ -17,7 +15,7 @@ export const SignLanguage: FC = () => {
           <Search />
         </div>
       </div>
-      <div className="mb-12 text-center  animate-fade-up animate-once animate-duration-700 animate-ease-in-out">
+      <div className="mb-12 text-center animate-fade-up animate-once animate-duration-700 animate-ease-in-out">
         <Button text="Закончить" to="/" />
       </div>
     </>
