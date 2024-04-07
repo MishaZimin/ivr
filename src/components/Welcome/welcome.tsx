@@ -28,7 +28,7 @@ export const Welcome: FC = () => {
 
           <div className="flex justify-center w-full rounded-full align-center h-1/2 ">
             <Link
-              className="flex flex-col justify-end  w-10/12 text-[80px] 
+              className="flex flex-col justify-end  w-11/12 text-[80px] 
                 rounded-tl-full rounded-tr-full border-t-[40px] border-r-[40px] border-l-[40px] 
               border-redd  pb-12 font-extrabold z-10 transition duration-200 transform hover:scale-[1.025]"
               to="/selection">
