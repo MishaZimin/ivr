@@ -4,7 +4,7 @@ import { Welcome } from "./components/Welcome/welcome";
 const App: FC = () => {
   return (
     <>
-      <div className="">
+      <div className="hidden sm-block">
         <Welcome />
       </div>
     </>
