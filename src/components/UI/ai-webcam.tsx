@@ -1,7 +1,11 @@
 import React, { FC, useState, useEffect, useRef, useCallback } from "react";
 import Webcam from "react-webcam";
 
-export const AIWebcam: FC = () => {
+interface Props {
+  onWordPairsChange: (newWordPairs: string[][]) => void;
+}
+
+export const AIWebcam: FC<Props> = ({ onWordPairsChange }) => {
   interface IvideoConstraints {
     width: number;
     height: number;
@@ -9,7 +13,7 @@ export const AIWebcam: FC = () => {
   }
 
   const videoConstraints: IvideoConstraints = {
-    width: 720,
+    width: 1080,
     height: 720,
     facingMode: "user",
   };
@@ -17,7 +21,7 @@ export const AIWebcam: FC = () => {
   const webcamRef = useRef<any>(null);
   const wsRef = useRef<WebSocket | null>(null);
 
-  const [sign, setSign] = useState<string[]>([]);
+  const [, setWordPairs] = useState<string[][]>([]);
 
   const capture = useCallback(() => {
     if (!wsRef.current || wsRef.current.readyState !== WebSocket.OPEN) {
@@ -29,6 +33,7 @@ export const AIWebcam: FC = () => {
       width: 224,
       height: 224,
     });
+
     if (imageSrc) {
       // console.log(imageSrc);
       wsRef.current.send(imageSrc.slice(23));
@@ -40,17 +45,6 @@ export const AIWebcam: FC = () => {
     const ws = new WebSocket(url);
     wsRef.current = ws;
 
-    // interface ReceivedMessage {
-    //   labels: { [key: number]: string };
-    //   confidence: { [key: number]: number };
-    // }
-
-    // const testReceivedMessage: ReceivedMessage = {
-    //   labels: { 0: "всё", 1: "быть" },
-    //   confidence: { 0: 0.85897374, 1: 0.06595782 },
-    // };
-    // console.log(testReceivedMessage.labels[0]);
-
     ws.onopen = () => {
       console.log("Connected to server");
     };
@@ -60,6 +54,15 @@ export const AIWebcam: FC = () => {
 
       const word1 = receivedMessage[0];
       const word2 = receivedMessage[1];
+
+      setWordPairs((prevState) => {
+        const newWordPairs = [...prevState, [word1, word2]];
+
+        onWordPairsChange(newWordPairs);
+
+        return newWordPairs;
+      });
+
       console.log(word1, "|", word2);
     };
 
@@ -74,7 +77,7 @@ export const AIWebcam: FC = () => {
     return () => {
       ws.close();
     };
-  }, []);
+  }, [onWordPairsChange]);
 
   useEffect(() => {
     const captureInterval = setInterval(() => {
@@ -94,7 +97,7 @@ export const AIWebcam: FC = () => {
         screenshotFormat="image/jpeg"
         mirrored={true}
         videoConstraints={videoConstraints}
-        className="absolute w-1/4 bottom-1.5 left-1.5"></Webcam>
+        className="rounded-3xl"></Webcam>
     </>
   );
 };

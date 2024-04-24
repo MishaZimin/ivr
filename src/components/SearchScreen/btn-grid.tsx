@@ -1,5 +1,5 @@
 import React from "react";
-import portrait1 from "../../assets/portrait1.png";
+// import portrait1 from "../../assets/portrait1.png";
 
 type IBtn = {
   img: string;
@@ -14,7 +14,7 @@ export const ButtonGrid = ({ buttons }: { buttons: IBtn[] }) => {
         {buttons.map((button, index) => (
           <button
             key={index}
-            className="flex flex-row items-center px-4 py-4 font-bold text-black transition duration-200 transform rounded-md bg-slate-100 hover:scale-[1.025]">
+            className="flex flex-row items-center px-4 py-4 font-bold text-black transition duration-200 transform rounded-md bg-starlite hover:scale-[1.025]">
             <img
               src={button.img}
               alt={button.text}
