@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 // import { Button } from "../UI/button-link";
 // import { StendCamera } from "./../SignLanguage/stend-camera";
 
-import { AIWebcam } from "../UI/aiwebcam";
+import { AIWebcam } from "../UI/ai-webcam";
 
 import Rectangle3 from "../../assets/Rectangle3.png";
 

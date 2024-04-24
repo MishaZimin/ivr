@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useCallback } from "react";
+import React, { FC, useState, useEffect, useRef, useCallback } from "react";
 import Webcam from "react-webcam";
 
 export const AIWebcam: FC = () => {
@@ -15,11 +15,13 @@ export const AIWebcam: FC = () => {
   };
 
   const webcamRef = useRef<any>(null);
-  const wsRef = useRef<WebSocket | null>(null); // Добавляем реф для хранения WebSocket соединения
+  const wsRef = useRef<WebSocket | null>(null);
+
+  const [sign, setSign] = useState<string[]>([]);
 
   const capture = useCallback(() => {
     if (!wsRef.current || wsRef.current.readyState !== WebSocket.OPEN) {
-      // console.log("server noopen");
+      // console.log("server no open");
       return;
     }
 
@@ -36,14 +38,29 @@ export const AIWebcam: FC = () => {
   useEffect(() => {
     const url = "ws://localhost:8001";
     const ws = new WebSocket(url);
-    wsRef.current = ws; // Сохраняем соединение в рефе при его создании
+    wsRef.current = ws;
+
+    // interface ReceivedMessage {
+    //   labels: { [key: number]: string };
+    //   confidence: { [key: number]: number };
+    // }
+
+    // const testReceivedMessage: ReceivedMessage = {
+    //   labels: { 0: "всё", 1: "быть" },
+    //   confidence: { 0: 0.85897374, 1: 0.06595782 },
+    // };
+    // console.log(testReceivedMessage.labels[0]);
 
     ws.onopen = () => {
       console.log("Connected to server");
     };
 
     ws.onmessage = (event) => {
-      console.log("Received message:", event.data);
+      let receivedMessage = JSON.parse(event.data);
+
+      const word1 = receivedMessage[0];
+      const word2 = receivedMessage[1];
+      console.log(word1, "|", word2);
     };
 
     ws.onerror = (error) => {
@@ -55,7 +72,7 @@ export const AIWebcam: FC = () => {
     };
 
     return () => {
-      ws.close(); // Закрываем соединение при размонтировании компонента
+      ws.close();
     };
   }, []);
 
@@ -77,7 +94,7 @@ export const AIWebcam: FC = () => {
         screenshotFormat="image/jpeg"
         mirrored={true}
         videoConstraints={videoConstraints}
-        className="absolute w-1/4 bottom-1.5 left-1.5 "></Webcam>
+        className="absolute w-1/4 bottom-1.5 left-1.5"></Webcam>
     </>
   );
 };
