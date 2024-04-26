@@ -7,7 +7,7 @@ export const Welcome: FC = () => {
     <>
       <div className="flex h-screen overflow-hidden ">
         <div className="flex flex-col w-7/12 mx-auto text-center animate-fade-up animate-once animate-duration-700 animate-ease-in-out">
-          <div className="pt-20 h-1/2">
+          <div className="pt-14 h-1/2">
             <h1 className="mb-6 text-[70px] font-circe font-extrabold">
               Здесь
             </h1>

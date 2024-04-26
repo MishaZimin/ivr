@@ -15,12 +15,11 @@ export const TestWebcam: FC = () => {
   const [wordPairs, setWordPairs] = useState<string[][]>([]);
   const navigate = useNavigate();
 
-  const handleWordPairsChange = (newWordPairs: string[][]) => {
-    setWordPairs(newWordPairs);
+  const handleWordPairsChange = (newWordPairs: string[]) => {
+    setWordPairs((prevWord) => [...prevWord, newWordPairs]);
   };
-
   useEffect(() => {
-    const foundGoodbye = wordPairs.some((pair) => pair.includes("до свидание"));
+    const foundGoodbye = wordPairs.some((pair) => pair.includes("привет"));
 
     if (foundGoodbye) {
       // history.push("/search");
@@ -33,7 +32,7 @@ export const TestWebcam: FC = () => {
       <div className="flex h-full ">
         <div className="flex flex-col pt-[6%] mx-auto">
           <h1 className="text-[35px] text-center mb-10">
-            Чтобы начать, покажите в камеру жест "до свидание"
+            Чтобы начать, покажите в камеру жест "привет"
           </h1>
           <div className="relative flex w-3/4 mx-auto">
             <img src={Rectangle3} alt="Rectangle3" />

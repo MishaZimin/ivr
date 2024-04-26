@@ -1,8 +1,8 @@
-import React, { FC, useState, useEffect, useRef, useCallback } from "react";
+import React, { FC, useEffect, useRef, useCallback } from "react";
 import Webcam from "react-webcam";
 
 interface Props {
-  onWordPairsChange: (newWordPairs: string[][]) => void;
+  onWordPairsChange: (newWordPairs: string[]) => void;
 }
 
 export const AIWebcam: FC<Props> = ({ onWordPairsChange }) => {
@@ -21,11 +21,8 @@ export const AIWebcam: FC<Props> = ({ onWordPairsChange }) => {
   const webcamRef = useRef<any>(null);
   const wsRef = useRef<WebSocket | null>(null);
 
-  const [, setWordPairs] = useState<string[][]>([]);
-
   const capture = useCallback(() => {
     if (!wsRef.current || wsRef.current.readyState !== WebSocket.OPEN) {
-      // console.log("server no open");
       return;
     }
 
@@ -35,7 +32,6 @@ export const AIWebcam: FC<Props> = ({ onWordPairsChange }) => {
     });
 
     if (imageSrc) {
-      // console.log(imageSrc);
       wsRef.current.send(imageSrc.slice(23));
     }
   }, []);
@@ -54,16 +50,11 @@ export const AIWebcam: FC<Props> = ({ onWordPairsChange }) => {
 
       const word1 = receivedMessage[0];
       const word2 = receivedMessage[1];
-
-      setWordPairs((prevState) => {
-        const newWordPairs = [...prevState, [word1, word2]];
-
-        onWordPairsChange(newWordPairs);
-
-        return newWordPairs;
-      });
-
       console.log(word1, "|", word2);
+
+      const newWordPairs = [word1, word2];
+
+      onWordPairsChange(newWordPairs);
     };
 
     ws.onerror = (error) => {

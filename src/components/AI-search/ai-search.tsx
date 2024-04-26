@@ -1,30 +1,39 @@
-import React, { useState, useEffect, FC } from "react";
+import React, { useState, FC } from "react";
 
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import { AIWebcam } from "../UI/ai-webcam";
-import close1 from "../../assets/close1.png";
+// import close1 from "../../assets/close1.png";
 import history1 from "../../assets/history1.png";
 
-export const AISearch: FC = () => {
-  const [wordPairs, setWordPairs] = useState<string[][]>([]);
-  const navigate = useNavigate();
+interface AISearchProps {
+  onWordSelect: (word: string) => void;
+}
 
-  const handleWordPairsChange = (newWordPairs: string[][]) => {
-    setWordPairs(newWordPairs);
+export const AISearch: FC<AISearchProps> = ({ onWordSelect }) => {
+  const [wordPairs, setWordPairs] = useState<string[][]>([]);
+
+  const handleWordPairsChange = (newWordPairs: string[]) => {
+    console.log("Новые пары слов:", newWordPairs);
+    setWordPairs((prevWord) => {
+      console.log("Предыдущие пары слов:", prevWord);
+      return [...prevWord, newWordPairs];
+    });
   };
+
   const handleHistory = () => {
     console.log("handle history");
+    console.log(wordPairs);
+    setWordPairs([]);
+    console.log(wordPairs);
+
+    onWordSelect("$");
   };
 
-  // useEffect(() => {
-  //   // const foundGoodbye = wordPairs.some((pair) => pair.includes("до свидание"));
-
-  //   // if (foundGoodbye) {
-  //   //   // history.push("/search");
-  //   //   navigate("/search");
-  //   // }
-  // }, [navigate, wordPairs]);
+  const handleWord = (word: string) => {
+    console.log(word);
+    onWordSelect(word);
+  };
 
   return (
     <>
@@ -35,21 +44,21 @@ export const AISearch: FC = () => {
         <div className="z-40 flex flex-wrap gap-2 left-2 top-40 w-[90%] ml-[5%] absolute ">
           {wordPairs.map((pair: any, index: number) => (
             <div key={index} className="flex gap-2 ">
-              <button className="flex flex-row px-3 py-1 my-auto transition duration-200 transform bg-green-400 rounded-full opacity-70 hover:scale-105">
+              <button
+                className="flex flex-row px-3 py-1 my-auto transition duration-200 transform bg-green-400 rounded-full opacity-70 hover:scale-105"
+                onClick={() => handleWord(pair[0])}>
                 <p className="">{pair[0]}</p>
-                <img
-                  src={close1}
-                  alt="close"
-                  className="w-[10px] my-auto ml-2"
-                />
+                {/* <button className="w-[10px] my-auto ml-2">
+                  <img src={close1} alt="close" />
+                </button> */}
               </button>
-              <button className="flex flex-row px-3 py-1 my-auto transition duration-200 transform rounded-full bg-redd opacity-70 hover:scale-105">
+              <button
+                className="flex flex-row px-3 py-1 my-auto transition duration-200 transform rounded-full bg-redd opacity-70 hover:scale-105"
+                onClick={() => handleWord(pair[1])}>
                 <p className="">{pair[1]}</p>
-                <img
-                  src={close1}
-                  alt="close"
-                  className="w-[10px] my-auto ml-2"
-                />
+                {/* <button className="w-[10px] my-auto ml-2">
+                  <img src={close1} alt="close" />
+                </button> */}
               </button>
             </div>
           ))}
@@ -57,7 +66,6 @@ export const AISearch: FC = () => {
             <button
               className="flex flex-row px-2 py-1 my-auto transition duration-200 transform bg-black rounded-full opacity-70 hover:scale-105"
               onClick={handleHistory}>
-              {/* <p>a</p> */}
               <img
                 src={history1}
                 alt="history1"

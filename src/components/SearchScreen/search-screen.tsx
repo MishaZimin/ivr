@@ -26,10 +26,20 @@ export const SearchScreen: FC = () => {
   ];
 
   const [search, setSearch] = useState<boolean>(false);
+  const [selectedWord, setSelectedWord] = useState<string>("");
 
   const handleAISearch = () => {
+    if (!search) setSelectedWord("");
     setSearch(search ? false : true);
-    console.log(search);
+  };
+  const handleSearch = () => {
+    if (search) setSearch(false);
+  };
+
+  const handleWordSelection = (word: string) => {
+    word === "$"
+      ? setSelectedWord("")
+      : setSelectedWord((prevWord) => prevWord + " " + word);
   };
 
   return (
@@ -38,11 +48,16 @@ export const SearchScreen: FC = () => {
         <div className="w-full h-32 bg-white"></div>
         <div className="absolute flex flex-row justify-between w-[80%] h-16 bg-greyy rounded-full left-[10%] top-24 z-30">
           <input
-            className=" w-[80%] pl-8 text-3xl rounded-[36px] bg-greyy focus:border-redd"
-            placeholder="Найти..."></input>
+            className="w-[80%] pl-8 text-3xl rounded-[36px] bg-greyy focus:border-redd"
+            placeholder="Найти..."
+            value={selectedWord}
+            onChange={(event) => setSelectedWord(event.target.value)}
+          />
 
           <div className="flex flex-row w-[20%] justify-end">
-            <button className="pr-4 transition duration-200 transform hover:scale-105">
+            <button
+              onClick={handleSearch}
+              className="pr-4 transition duration-200 transform hover:scale-105">
               <img className="h-8" src={SearchSymbol} alt="SearchSymbol" />
             </button>
 
@@ -60,28 +75,20 @@ export const SearchScreen: FC = () => {
 
         {search ? (
           <div className="absolute ml-[10%] w-[80%] top-24 z-20 rounded-xl">
-            <AISearch />
+            <AISearch onWordSelect={handleWordSelection} />
           </div>
         ) : null}
+
         <div>
           <div className="w-[90%] mx-auto mt-20 h-20 mb-8 flex justify-center font-extrabold text-[45px] ">
-            <h1>По какому вопросу ваше обращение?</h1>
+            <h1 className={search ? "blur-[2px]" : "blur-none"}>
+              По какому вопросу ваше обращение?
+            </h1>
           </div>
-          <div>
+          <div className={search ? "blur-[2px]" : "blur-none"}>
             <ButtonGrid buttons={buttons}></ButtonGrid>
           </div>
         </div>
-        {/* <div className="w-full overflow-visible h-4/5 bg-redd"></div> */}
-
-        {/* <div className="">
-          <div className="pt-[50px] w-1/2 mx-auto">
-            <Search />
-          </div>
-        </div>
-
-        <div className="mt-16 text-center">
-          <Button text="Закончить" to="/" />
-        </div> */}
       </div>
     </>
   );

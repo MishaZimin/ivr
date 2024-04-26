@@ -39,7 +39,7 @@ export const Search: FC = () => {
           onChange={(e) => setQuery(e.target.value)}
         />
 
-        <ul className="py-3 text-left pl-4">
+        <ul className="py-3 pl-4 text-left">
           {data
             .filter((item) => item.name.includes(query))
             .map((item) => (
