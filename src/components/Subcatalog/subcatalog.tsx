@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { ButtonGrid } from "./btn-grid";
+import { ButtonGrid } from "./../SearchScreen/btn-grid";
 
 import SearchSymbol from "../../assets/search-symbol.png";
 import portrait1 from "../../assets/portrait1.png";
@@ -11,8 +11,12 @@ import return1 from "../../assets/return1.png";
 import { AISearch } from "../AI-search/ai-search";
 import { Link, useNavigate } from "react-router-dom";
 
-export const SearchScreen: FC = () => {
+export const Subcatalog: FC = () => {
   const navigate = useNavigate();
+
+  // const handleClick = () => {
+  //   navigate("/catalog");
+  // };
 
   type IBtn = {
     img: string;
@@ -21,16 +25,22 @@ export const SearchScreen: FC = () => {
   };
 
   const buttons: IBtn[] = [
-    { img: sign2_1, text: "Консультация по паспорту РФ", count: 5 },
-    { img: sign_2_1, text: "Консультация по ИНН", count: 10 },
-    { img: sign_2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign_2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign_2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign_2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign_2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign_2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign_2_1, text: "Консультация по паспорту РФ", count: 10 },
+    { img: sign2_1, text: "Достижение 14 лет", count: 10 },
+    { img: sign2_1, text: "Достижение 14 лет", count: 5 },
+    { img: sign2_1, text: "Достижение 14 лет", count: 10 },
+    { img: sign2_1, text: "Достижение 14 лет", count: 10 },
+    { img: sign2_1, text: "Достижение 14 лет", count: 10 },
+    { img: sign2_1, text: "Достижение 14 лет", count: 10 },
+    { img: sign2_1, text: "Достижение 14 лет", count: 10 },
+    { img: sign2_1, text: "Достижение 14 лет", count: 10 },
+    { img: sign2_1, text: "Достижение 14 лет", count: 10 },
   ];
+
+  const subcatalog = {
+    img: sign2_1,
+    text: "Консультация по паспорту РФ",
+    count: 10,
+  };
 
   const [search, setSearch] = useState<boolean>(false);
   const [selectedWord, setSelectedWord] = useState<string>("");
@@ -49,14 +59,18 @@ export const SearchScreen: FC = () => {
       : setSelectedWord((prevWord) => prevWord + " " + word);
   };
 
-  const handleSubcatalog = () => {
-    navigate("/subcatalog");
+  const handleDiscriptionSub = () => {
+    navigate("/discriptionsub");
+  };
+
+  const handleCatalog = () => {
+    navigate("/search");
   };
 
   return (
     <>
-      <div className="flex flex-col bg-white font-circe">
-        <div className="flex flex-row mt-20 justify-between w-[80%] h-16 bg-greyy rounded-full left-[10%] z-30 mx-auto">
+      <div className="flex flex-col bg-starlite font-circe">
+        <div className="flex flex-row mt-20 justify-between w-[80%] h-16 bg-greyy rounded-full left-[10%] z-30 mx-auto font-circe">
           <input
             className="w-[85%] px-8 text-3xl rounded-[36px] bg-greyy focus:border-redd"
             placeholder="Найти..."
@@ -84,28 +98,40 @@ export const SearchScreen: FC = () => {
         </div>
 
         {search ? (
-          <div className="absolute ml-[10%] w-[80%] top-24 z-20 rounded-xl">
+          <div className="absolute ml-[10%] w-[80%] top-24 z-20 rounded-xl font-circe">
             <AISearch onWordSelect={handleWordSelection} />
           </div>
         ) : null}
 
-        <div className="flex flex-col mb-12">
-          <div className="w-[90%] mx-auto mt-12 h-20 mb-12 flex justify-center font-extrabold text-[45px] font-circe">
+        <button
+          onClick={handleCatalog}
+          className="flex flex-row relative w-[90%] mt-16 mx-auto items-center px-4 pt-4 font-bold text-black transition duration-200 transform rounded-[40px] bg-gradient-to-b from-starlite to-white hover:scale-[1.025] shadow-xl ">
+          <img className="absolute top-14 left-8" src={return1} alt="return1" />
+          <img
+            src={subcatalog.img}
+            alt={subcatalog.text}
+            className="w-1/2 pl-40 my-auto"
+          />
+          <div className="flex flex-col justify-between pb-32 pl-20 pr-24 pt-6  text-[65px] text-left">
+            <p>{subcatalog.text}</p>
+          </div>
+        </button>
+
+        <div className="flex flex-col mb-12 font-circe">
+          <div className="w-[90%] mx-auto mt-12 h-20 mb-12 flex justify-center font-extrabold text-[45px] ">
             <h1 className={search ? "blur-[2px]" : "blur-none"}>
-              По какому вопросу ваше обращение?
+              Какая у вас жизненная ситуация?
             </h1>
           </div>
           <div className={search ? "blur-[2px]" : "blur-none"}>
-            {/* <ButtonGrid buttons={buttons}></ButtonGrid> */}
-
             <div className="container mx-auto">
               <div className="grid grid-cols-2 gap-8 ">
                 {buttons.map((button, index) => (
                   <button
                     key={index}
-                    onClick={handleSubcatalog}
-                    className="flex flex-col items-center px-4 pt-4 font-bold text-black transition duration-200 transform rounded-[40px] bg-gradient-to-b from-starlite to-white hover:scale-[1.025] shadow-xl">
-                    <div className="flex flex-col justify-between pb-8 mt-6 ml-4 text-3xl text-left font-circe">
+                    onClick={handleDiscriptionSub}
+                    className="flex flex-col items-center px-4 pt-4 font-bold text-black transition duration-200 transform rounded-[40px] bg-white hover:scale-[1.025] shadow-xl">
+                    <div className="flex flex-col justify-between pb-8 mt-6 ml-4 text-3xl text-left">
                       <p>{button.text}</p>
                     </div>
                     <img

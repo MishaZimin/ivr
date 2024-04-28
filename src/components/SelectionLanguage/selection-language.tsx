@@ -18,13 +18,13 @@ export const SelectionLanguage: FC = () => {
               <Link className="bg-white  text-[25px] font-normal" to="/easy">
                 <img src={Rectangle2} alt="Rectangle1" className="mb-4 h-80" />
 
-                <p>На простом языке</p>
+                <p className="text-[30px] font-circe">На простом языке</p>
               </Link>
             </div>
             <div className="text-center transition duration-200 transform hover:scale-105">
               <Link className="bg-white  text-[25px] font-normal" to="/test">
                 <img src={Rectangle1} alt="Rectangle2" className="mb-4 h-80 " />
-                <p>На языке жестов</p>
+                <p className="font-circe text-[30px]">На языке жестов</p>
               </Link>
             </div>
           </div>

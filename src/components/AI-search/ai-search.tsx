@@ -38,12 +38,12 @@ export const AISearch: FC<AISearchProps> = ({ onWordSelect }) => {
   return (
     <>
       <div className="flex flex-col pt-20 bg-starlite rounded-[36px] pb-10 relative shadow-xl">
-        <h1 className="text-[35px] text-center mb-6 text-black opacity-70">
+        <h1 className="text-[35px] text-center mb-6 text-black opacity-70 text-[50px]">
           Покажите ваш запрос
         </h1>
-        <div className="z-40 flex flex-wrap gap-2 left-2 top-40 w-[90%] ml-[5%] absolute ">
+        <div className="z-40 flex flex-wrap gap-2 left-2 top-48 w-[90%] ml-[5%] absolute ">
           {wordPairs.map((pair: any, index: number) => (
-            <div key={index} className="flex gap-2 ">
+            <div key={index} className="flex gap-2 text-[20px]">
               <button
                 className="flex flex-row px-3 py-1 my-auto transition duration-200 transform bg-green-400 rounded-full opacity-70 hover:scale-105"
                 onClick={() => handleWord(pair[0])}>
@@ -64,12 +64,12 @@ export const AISearch: FC<AISearchProps> = ({ onWordSelect }) => {
           ))}
           {wordPairs.length > 0 ? (
             <button
-              className="flex flex-row px-2 py-1 my-auto transition duration-200 transform bg-black rounded-full opacity-70 hover:scale-105"
+              className="flex flex-row px-3 py-2 my-auto transition duration-200 transform bg-black rounded-full opacity-70 hover:scale-105"
               onClick={handleHistory}>
               <img
                 src={history1}
                 alt="history1"
-                className="w-[20px] my-auto ml-2 mr-1"
+                className="w-[20px] my-auto ml-1 mr-1"
               />
             </button>
           ) : null}

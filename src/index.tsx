@@ -12,6 +12,8 @@ import { EasyLanguage } from "./components/EasyLanguage/easy-language";
 import { SignLanguage } from "./components/SignLanguage/sign-language";
 import { TestWebcam } from "./components/TestWebcam/test";
 import { SearchScreen } from "./components/SearchScreen/search-screen";
+import { Subcatalog } from "./components/Subcatalog/subcatalog";
+import { DiscriptionSubcatalog } from "./components/Subcatalog/discription-sub";
 
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
@@ -32,6 +34,8 @@ root.render(
 
         <Route path="/test" element={<TestWebcam />} />
         <Route path="/search" element={<SearchScreen />} />
+        <Route path="/subcatalog" element={<Subcatalog />} />
+        <Route path="/discriptionsub" element={<DiscriptionSubcatalog />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

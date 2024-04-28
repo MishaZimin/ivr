@@ -6,8 +6,7 @@ module.exports = {
     extend: {
       fontFamily: {
         monserrat: "Montserrat",
-        circe: ["circe", "sans-serif"],
-        kanit: "Kanit",
+        circe: ["Circe-Regular"],
       },
       animation: {
         defolt:

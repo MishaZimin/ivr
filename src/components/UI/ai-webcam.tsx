@@ -82,13 +82,15 @@ export const AIWebcam: FC<Props> = ({ onWordPairsChange }) => {
 
   return (
     <>
-      <Webcam
-        ref={webcamRef}
-        audio={false}
-        screenshotFormat="image/jpeg"
-        mirrored={true}
-        videoConstraints={videoConstraints}
-        className="rounded-3xl"></Webcam>
+      <div>
+        <Webcam
+          ref={webcamRef}
+          audio={false}
+          screenshotFormat="image/jpeg"
+          mirrored={true}
+          videoConstraints={videoConstraints}
+          className="rounded-[30px]"></Webcam>
+      </div>
     </>
   );
 };
