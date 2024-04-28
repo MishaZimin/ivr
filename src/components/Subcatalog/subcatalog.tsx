@@ -70,9 +70,9 @@ export const Subcatalog: FC = () => {
   return (
     <>
       <div className="flex flex-col bg-starlite font-circe">
-        <div className="flex flex-row mt-20 justify-between w-[80%] h-16 bg-greyy rounded-full left-[10%] z-30 mx-auto font-circe">
+        <div className="flex flex-row mt-20 justify-between w-[80%] h-16 bg-darkgreyy rounded-full left-[10%] z-30 mx-auto font-circe">
           <input
-            className="w-[85%] px-8 text-3xl rounded-[36px] bg-greyy focus:border-redd"
+            className="w-[85%] px-8 text-3xl rounded-[36px] bg-darkgreyy focus:border-redd"
             placeholder="Найти..."
             value={selectedWord}
             onChange={(event) => setSelectedWord(event.target.value)}
@@ -99,7 +99,11 @@ export const Subcatalog: FC = () => {
 
         {search ? (
           <div className="absolute ml-[10%] w-[80%] top-24 z-20 rounded-xl font-circe">
-            <AISearch onWordSelect={handleWordSelection} />
+            <AISearch
+              onWordSelect={handleWordSelection}
+              onHeader="Покажите ваш запрос"
+              onHeaderStyles="text-[50px]"
+            />
           </div>
         ) : null}
 

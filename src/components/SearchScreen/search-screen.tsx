@@ -22,14 +22,14 @@ export const SearchScreen: FC = () => {
 
   const buttons: IBtn[] = [
     { img: sign2_1, text: "Консультация по паспорту РФ", count: 5 },
-    { img: sign_2_1, text: "Консультация по ИНН", count: 10 },
-    { img: sign_2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign_2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign_2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign_2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign_2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign_2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign_2_1, text: "Консультация по паспорту РФ", count: 10 },
+    { img: sign2_1, text: "Консультация по ИНН", count: 10 },
+    { img: sign2_1, text: "Консультация по паспорту РФ", count: 10 },
+    { img: sign2_1, text: "Консультация по паспорту РФ", count: 10 },
+    { img: sign2_1, text: "Консультация по паспорту РФ", count: 10 },
+    { img: sign2_1, text: "Консультация по паспорту РФ", count: 10 },
+    { img: sign2_1, text: "Консультация по паспорту РФ", count: 10 },
+    { img: sign2_1, text: "Консультация по паспорту РФ", count: 10 },
+    { img: sign2_1, text: "Консультация по паспорту РФ", count: 10 },
   ];
 
   const [search, setSearch] = useState<boolean>(false);
@@ -56,9 +56,9 @@ export const SearchScreen: FC = () => {
   return (
     <>
       <div className="flex flex-col bg-white font-circe">
-        <div className="flex flex-row mt-20 justify-between w-[80%] h-16 bg-greyy rounded-full left-[10%] z-30 mx-auto">
+        <div className="flex flex-row mt-20 justify-between w-[80%] h-16 bg-darkgreyy rounded-full left-[10%] z-30 mx-auto">
           <input
-            className="w-[85%] px-8 text-3xl rounded-[36px] bg-greyy focus:border-redd"
+            className="w-[85%] px-8 text-3xl rounded-[36px] bg-darkgreyy focus:border-redd"
             placeholder="Найти..."
             value={selectedWord}
             onChange={(event) => setSelectedWord(event.target.value)}
@@ -85,7 +85,11 @@ export const SearchScreen: FC = () => {
 
         {search ? (
           <div className="absolute ml-[10%] w-[80%] top-24 z-20 rounded-xl">
-            <AISearch onWordSelect={handleWordSelection} />
+            <AISearch
+              onWordSelect={handleWordSelection}
+              onHeader="Покажите ваш запрос"
+              onHeaderStyles="text-[50px] text-extrabold mx-auto"
+            />
           </div>
         ) : null}
 
@@ -104,7 +108,7 @@ export const SearchScreen: FC = () => {
                   <button
                     key={index}
                     onClick={handleSubcatalog}
-                    className="flex flex-col items-center px-4 pt-4 font-bold text-black transition duration-200 transform rounded-[40px] bg-gradient-to-b from-starlite to-white hover:scale-[1.025] shadow-xl">
+                    className="flex flex-col items-center px-4 pt-4 font-bold text-black transition duration-200 transform rounded-[40px] bg-gradient-to-b from-orange to-white hover:scale-[1.025] shadow-xl">
                     <div className="flex flex-col justify-between pb-8 mt-6 ml-4 text-3xl text-left font-circe">
                       <p>{button.text}</p>
                     </div>

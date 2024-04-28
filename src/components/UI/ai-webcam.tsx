@@ -3,9 +3,15 @@ import Webcam from "react-webcam";
 
 interface Props {
   onWordPairsChange: (newWordPairs: string[]) => void;
+  onHeight: number;
+  onWidth: number;
 }
 
-export const AIWebcam: FC<Props> = ({ onWordPairsChange }) => {
+export const AIWebcam: FC<Props> = ({
+  onWordPairsChange,
+  onHeight,
+  onWidth,
+}) => {
   interface IvideoConstraints {
     width: number;
     height: number;
@@ -13,8 +19,8 @@ export const AIWebcam: FC<Props> = ({ onWordPairsChange }) => {
   }
 
   const videoConstraints: IvideoConstraints = {
-    width: 1080,
-    height: 720,
+    width: onWidth,
+    height: onHeight,
     facingMode: "user",
   };
 
@@ -89,7 +95,7 @@ export const AIWebcam: FC<Props> = ({ onWordPairsChange }) => {
           screenshotFormat="image/jpeg"
           mirrored={true}
           videoConstraints={videoConstraints}
-          className="rounded-[30px]"></Webcam>
+          className="rounded-[30px] border-4 border-redd"></Webcam>
       </div>
     </>
   );
