@@ -102,7 +102,7 @@ export const Subcatalog: FC = () => {
             <AISearch
               onWordSelect={handleWordSelection}
               onHeader="Покажите ваш запрос"
-              onHeaderStyles="text-[50px]"
+              onHeaderStyles="text-[50px] text-extrabold mx-auto"
             />
           </div>
         ) : null}

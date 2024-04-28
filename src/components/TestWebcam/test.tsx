@@ -26,7 +26,7 @@ export const TestWebcam: FC = () => {
     setWordPairs((prevWord) => [...prevWord, newWordPairs]);
   };
   useEffect(() => {
-    const foundGoodbye = wordPairs.some((pair) => pair.includes("привет"));
+    const foundGoodbye = wordPairs.some((pair) => pair.includes("дом"));
 
     if (foundGoodbye) {
       // history.push("/search");
@@ -39,7 +39,7 @@ export const TestWebcam: FC = () => {
       <div className="flex h-full ">
         <div className="flex flex-col pt-[5%] mx-auto">
           <h1 className="text-[35px] text-center mb-10 font-circe font-bold">
-            Чтобы начать, покажите в камеру жест "привет"
+            Чтобы начать, покажите в камеру жест "Дом"
           </h1>
           <div className="relative flex w-3/4 mx-auto">
             <AIWebcam
