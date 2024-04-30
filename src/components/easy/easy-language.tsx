@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Button } from "../ui/button-link";
+import { Link } from "react-router-dom";
 
 export const EasyLanguage: FC = () => {
   return (
@@ -9,7 +9,11 @@ export const EasyLanguage: FC = () => {
           <p>easy language</p>
         </div>
         <div className="mt-16 text-center">
-          <Button text="Закончить" to="/" />
+          <Link
+            className="px-6 py-4 text-center transition duration-200 transform bg-white rounded-md shadow-lg hover:scale-105"
+            to="/">
+            Закончить
+          </Link>
         </div>
       </div>
     </>
