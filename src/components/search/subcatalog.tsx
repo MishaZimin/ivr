@@ -1,29 +1,27 @@
-import React, { FC, useState } from "react";
-import { ButtonGrid } from "./../SearchScreen/btn-grid";
+import { FC, useState } from "react";
 
 import SearchSymbol from "../../assets/search-symbol.png";
 import portrait1 from "../../assets/portrait1.png";
-
-import sign_2_1 from "../../assets/sign_2_1.svg";
 import sign2_1 from "../../assets/sign2_1.png";
 import return1 from "../../assets/return1.png";
 
-import { AISearch } from "../AI-search/ai-search";
-import { Link, useNavigate } from "react-router-dom";
+import { AISearch } from "../ai/ai-search";
+import { useNavigate } from "react-router-dom";
+
+type IBtn = {
+  img: string;
+  text: string;
+  count: number;
+};
 
 export const Subcatalog: FC = () => {
   const navigate = useNavigate();
 
-  // const handleClick = () => {
-  //   navigate("/catalog");
-  // };
-
-  type IBtn = {
-    img: string;
-    text: string;
-    count: number;
+  const subcatalog = {
+    img: sign2_1,
+    text: "Консультация по паспорту РФ",
+    count: 10,
   };
-
   const buttons: IBtn[] = [
     { img: sign2_1, text: "Достижение 14 лет", count: 10 },
     { img: sign2_1, text: "Достижение 14 лет", count: 5 },
@@ -36,12 +34,6 @@ export const Subcatalog: FC = () => {
     { img: sign2_1, text: "Достижение 14 лет", count: 10 },
   ];
 
-  const subcatalog = {
-    img: sign2_1,
-    text: "Консультация по паспорту РФ",
-    count: 10,
-  };
-
   const [search, setSearch] = useState<boolean>(false);
   const [selectedWord, setSelectedWord] = useState<string>("");
 
@@ -49,6 +41,7 @@ export const Subcatalog: FC = () => {
     if (!search) setSelectedWord("");
     setSearch(search ? false : true);
   };
+
   const handleSearch = () => {
     if (search) setSearch(false);
   };
@@ -107,19 +100,25 @@ export const Subcatalog: FC = () => {
           </div>
         ) : null}
 
-        <button
-          onClick={handleCatalog}
-          className="flex flex-row relative w-[90%] mt-16 mx-auto items-center px-4 pt-4 font-bold text-black transition duration-200 transform rounded-[40px] bg-gradient-to-b from-starlite to-white hover:scale-[1.025] shadow-xl ">
-          <img className="absolute top-14 left-8" src={return1} alt="return1" />
-          <img
-            src={subcatalog.img}
-            alt={subcatalog.text}
-            className="w-1/2 pl-40 my-auto"
-          />
-          <div className="flex flex-col justify-between pb-32 pl-20 pr-24 pt-6  text-[65px] text-left">
-            <p>{subcatalog.text}</p>
-          </div>
-        </button>
+        <div className={search ? "blur-[2px]" : "blur-none"}>
+          <button
+            onClick={handleCatalog}
+            className="flex flex-row relative w-[90%] mt-16 mx-auto items-center px-4 pt-4 font-bold text-black transition duration-200 transform rounded-[40px] bg-gradient-to-b from-starlite to-white hover:scale-[1.025] shadow-xl ">
+            <img
+              className="absolute top-14 left-8"
+              src={return1}
+              alt="return1"
+            />
+            <img
+              src={subcatalog.img}
+              alt={subcatalog.text}
+              className="w-1/2 pl-40 my-auto"
+            />
+            <div className="flex flex-col justify-between pb-32 pl-20 pr-24 pt-6  text-[65px] text-left">
+              <p>{subcatalog.text}</p>
+            </div>
+          </button>
+        </div>
 
         <div className="flex flex-col mb-12 font-circe">
           <div className="w-[90%] mx-auto mt-12 h-20 mb-12 flex justify-center font-extrabold text-[45px] ">

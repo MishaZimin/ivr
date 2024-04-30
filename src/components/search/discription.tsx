@@ -1,12 +1,9 @@
-import React, { FC } from "react";
+import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 
 import sign_2_1 from "../../assets/sign_2_1.svg";
 import Rectangle_3 from "../../assets/Rectangle_3.png";
 import return1 from "../../assets/return1.png";
-
-// import Rectangle3 from "../../assets/Rectangle3.png";
-
-import { useNavigate } from "react-router-dom";
 
 export const DiscriptionSubcatalog: FC = () => {
   const navigate = useNavigate();
@@ -16,11 +13,6 @@ export const DiscriptionSubcatalog: FC = () => {
     text: "Достижение 14 лет",
     count: 10,
   };
-  // const textSubcatalog = [
-  //   "Подать заявление на оформление паспорта подостижению 14 лет можно на следующий день после наступления события.",
-  //   "",
-  //   "",
-  // ];
 
   const handleSubcatalog = () => {
     navigate("/subcatalog");

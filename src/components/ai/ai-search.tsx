@@ -1,8 +1,7 @@
-import React, { useState, FC } from "react";
+import { useState, FC } from "react";
 
-// import { useNavigate } from "react-router-dom";
+import { AIWebcam } from "./ai-webcam";
 
-import { AIWebcam } from "../UI/ai-webcam";
 import close1 from "../../assets/close1.png";
 import history1 from "../../assets/history1.png";
 

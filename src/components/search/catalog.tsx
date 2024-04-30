@@ -1,24 +1,20 @@
 import React, { FC, useState } from "react";
-import { ButtonGrid } from "./btn-grid";
+import { useNavigate } from "react-router-dom";
 
 import SearchSymbol from "../../assets/search-symbol.png";
 import portrait1 from "../../assets/portrait1.png";
-
-import sign_2_1 from "../../assets/sign_2_1.svg";
 import sign2_1 from "../../assets/sign2_1.png";
-import return1 from "../../assets/return1.png";
 
-import { AISearch } from "../AI-search/ai-search";
-import { Link, useNavigate } from "react-router-dom";
+import { AISearch } from "../ai/ai-search";
+
+type IBtn = {
+  img: string;
+  text: string;
+  count: number;
+};
 
 export const SearchScreen: FC = () => {
   const navigate = useNavigate();
-
-  type IBtn = {
-    img: string;
-    text: string;
-    count: number;
-  };
 
   const buttons: IBtn[] = [
     { img: sign2_1, text: "Консультация по паспорту РФ", count: 5 },

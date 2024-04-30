@@ -1,5 +1,4 @@
 import { FC } from "react";
-// import { Button } from "../UI/button-link";
 import { Link } from "react-router-dom";
 
 import Rectangle1 from "../../assets/Rectangle1.png";
@@ -17,7 +16,6 @@ export const SelectionLanguage: FC = () => {
             <div className="text-center transition duration-200 transform hover:scale-105">
               <Link className="bg-white  text-[25px] font-normal" to="/easy">
                 <img src={Rectangle2} alt="Rectangle1" className="mb-4 h-80" />
-
                 <p className="text-[30px] font-circe">На простом языке</p>
               </Link>
             </div>

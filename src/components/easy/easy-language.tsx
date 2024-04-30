@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Button } from "../UI/button-link";
+import { Button } from "../ui/button-link";
 
 export const EasyLanguage: FC = () => {
   return (

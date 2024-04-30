@@ -1,37 +1,20 @@
-import React, { useState, useEffect, FC } from "react";
-// import WebSocket from "ws";
-
+import { useState, useEffect, FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-// import { Search } from "./../UI/search";
-// import { Button } from "../UI/button-link";
-// import { StendCamera } from "./../SignLanguage/stend-camera";
-import { AISearch } from "../AI-search/ai-search";
-
-import { AIWebcam } from "../UI/ai-webcam";
-
-import Rectangle_3 from "../../assets/Rectangle_3.png";
+import { AIWebcam } from "../ai/ai-webcam";
 
 export const TestWebcam: FC = () => {
   const [wordPairs, setWordPairs] = useState<string[][]>([]);
   const navigate = useNavigate();
-  const [selectedWord, setSelectedWord] = useState<string>("");
 
-  const handleWordSelection = (word: string) => {
-    word === "$"
-      ? setSelectedWord("")
-      : setSelectedWord((prevWord) => prevWord + " " + word);
-  };
   const handleWordPairsChange = (newWordPairs: string[]) => {
     setWordPairs((prevWord) => [...prevWord, newWordPairs]);
   };
-  useEffect(() => {
-    const foundGoodbye = wordPairs.some((pair) => pair.includes("дом"));
 
-    if (foundGoodbye) {
-      // history.push("/search");
-      navigate("/search");
-    }
+  useEffect(() => {
+    const word = "дом";
+    const foundWord = wordPairs.some((pair) => pair.includes(word));
+
+    if (foundWord) navigate("/search");
   }, [navigate, wordPairs]);
 
   return (
