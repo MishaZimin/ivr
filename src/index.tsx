@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 
 import { SelectionLanguage } from "./components/selection/selection-language";
-import { Welcome } from "./components/welcome/welcome";
+import { Welcome } from "./components/welcome-screen/welcome";
 import { EasyLanguage } from "./components/easy/easy-language";
 import { TestWebcam } from "./components/test-sevice/test";
 import { SearchScreen } from "./components/search/catalog";

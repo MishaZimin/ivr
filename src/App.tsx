@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Welcome } from "./components/welcome/welcome";
+import { Welcome } from "./components/welcome-screen/welcome";
 import "./index.css";
 
 const App: FC = () => {
