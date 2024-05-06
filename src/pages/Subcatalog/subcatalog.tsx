@@ -1,11 +1,11 @@
 import { FC, useState } from "react";
 
-import SearchSymbol from "../../assets/search-symbol.png";
-import portrait1 from "../../assets/portrait1.png";
-import sign2_1 from "../../assets/sign2_1.png";
-import return1 from "../../assets/return1.png";
+import SearchSymbol from "../../app/img/search-symbol.png";
+import portrait1 from "../../app/img/portrait1.png";
+import sign2_1 from "../../app/img/sign2_1.png";
+import return1 from "../../app/img/return1.png";
 
-import { AISearch } from "../ai/ai-search";
+import { AISearch } from "../../widgets/ai/ai-search";
 import { useNavigate } from "react-router-dom";
 
 type IBtn = {
@@ -114,7 +114,7 @@ export const Subcatalog: FC = () => {
               alt={subcatalog.text}
               className="w-1/2 pl-40 my-auto"
             />
-            <div className="flex flex-col justify-between pb-32 pl-20 pr-24 pt-6  text-[65px] text-left">
+            <div className="flex flex-col justify-between pb-32 pl-20 pr-24 pt-6  text-[60px] text-left">
               <p>{subcatalog.text}</p>
             </div>
           </button>

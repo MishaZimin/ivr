@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { Welcome } from "./components/welcome-screen/welcome";
-import "./index.css";
+import { Welcome } from "../pages/Welcome/welcome";
+import "./styles/index.css";
 
 const App: FC = () => {
   return (

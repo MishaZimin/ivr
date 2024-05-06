@@ -1,33 +1,12 @@
 import React, { FC, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-import SearchSymbol from "../../assets/search-symbol.png";
-import portrait1 from "../../assets/portrait1.png";
-import sign2_1 from "../../assets/sign2_1.png";
+import SearchSymbol from "../../app/img/search-symbol.png";
+import portrait1 from "../../app/img/portrait1.png";
 
-import { AISearch } from "../ai/ai-search";
-
-type IBtn = {
-  img: string;
-  text: string;
-  count: number;
-};
+import { AISearch } from "../../widgets/ai/ai-search";
+import { CatalogButton } from "../../widgets/catalog-button/catalog-button";
 
 export const SearchScreen: FC = () => {
-  const navigate = useNavigate();
-
-  const buttons: IBtn[] = [
-    { img: sign2_1, text: "Консультация по паспорту РФ", count: 5 },
-    { img: sign2_1, text: "Консультация по ИНН", count: 10 },
-    { img: sign2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign2_1, text: "Консультация по паспорту РФ", count: 10 },
-  ];
-
   const [search, setSearch] = useState<boolean>(false);
   const [selectedWord, setSelectedWord] = useState<string>("");
 
@@ -43,10 +22,6 @@ export const SearchScreen: FC = () => {
     word === "$"
       ? setSelectedWord("")
       : setSelectedWord((prevWord) => prevWord + " " + word);
-  };
-
-  const handleSubcatalog = () => {
-    navigate("/subcatalog");
   };
 
   return (
@@ -96,26 +71,8 @@ export const SearchScreen: FC = () => {
             </h1>
           </div>
           <div className={search ? "blur-[2px]" : "blur-none"}>
-            {/* <ButtonGrid buttons={buttons}></ButtonGrid> */}
-
-            <div className="container mx-auto">
-              <div className="grid grid-cols-2 gap-8 ">
-                {buttons.map((button, index) => (
-                  <button
-                    key={index}
-                    onClick={handleSubcatalog}
-                    className="flex flex-col items-center px-4 pt-4 font-bold text-black transition duration-200 transform rounded-[40px] bg-gradient-to-b from-orange to-white hover:scale-[1.025] shadow-xl">
-                    <div className="flex flex-col justify-between pb-8 mt-6 ml-4 text-3xl text-left font-circe">
-                      <p>{button.text}</p>
-                    </div>
-                    <img
-                      src={button.img}
-                      alt={button.text}
-                      className="w-3/4 my-auto "
-                    />
-                  </button>
-                ))}
-              </div>
+            <div className="container grid grid-cols-2 gap-8 mx-auto ">
+              <CatalogButton />
             </div>
           </div>
         </div>

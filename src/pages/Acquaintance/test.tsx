@@ -1,6 +1,6 @@
 import { useState, useEffect, FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AIWebcam } from "../ai/ai-webcam";
+import { AIWebcam } from "../../widgets/ai/ai-webcam";
 
 export const TestWebcam: FC = () => {
   const [wordPairs, setWordPairs] = useState<string[][]>([]);
@@ -14,7 +14,7 @@ export const TestWebcam: FC = () => {
     const word = "дом";
     const foundWord = wordPairs.some((pair) => pair.includes(word));
 
-    if (foundWord) navigate("/search");
+    if (foundWord) navigate("/successfully");
   }, [navigate, wordPairs]);
 
   return (
@@ -34,7 +34,7 @@ export const TestWebcam: FC = () => {
         </div>
         <Link
           className="absolute bg-white text-[25px] font-normal bottom-1/2 right-12 font-circe"
-          to="/search">
+          to="/successfully">
           next
         </Link>
       </div>
