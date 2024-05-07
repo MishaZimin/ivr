@@ -1,6 +1,6 @@
 import { useState, FC } from "react";
 
-import { AIWebcam } from "./ai-webcam";
+import { AIWebcam } from "../../features/next-button/ai/ai-webcam";
 
 import close1 from "../../app/img/close1.png";
 import history1 from "../../app/img/history1.png";
@@ -16,14 +16,14 @@ export const AISearch: FC<AISearchProps> = ({
   onHeader,
   onHeaderStyles,
 }) => {
-  const [wordPairs, setWordPairs] = useState<string[][]>([]);
+  const [search, setSearch] = useState<string[]>([]);
 
-  const handleWordPairsChange = (newWordPairs: string[]) => {
-    setWordPairs((prevWord) => [...prevWord, newWordPairs]);
+  const handleWordPairsChange = (newsearch: string[]) => {
+    setSearch((prevWord) => [...prevWord, newsearch[0], newsearch[1]]);
   };
 
   const handleHistory = () => {
-    setWordPairs([]);
+    setSearch([]);
     onWordSelect("$");
   };
 
@@ -31,9 +31,11 @@ export const AISearch: FC<AISearchProps> = ({
     onWordSelect(word);
   };
 
-  const handleDelete = (index: number, indexWord: number) => {
-    const a = wordPairs[index].splice(indexWord, 1);
-    console.log(a);
+  const handleDelete = (index: number) => {
+    // const a = search[index].splice(indexWord, 1);
+    const newArr = [...search.slice(0, index), ...search.slice(index + 1)];
+    setSearch(newArr);
+    console.log(index);
   };
 
   return (
@@ -42,46 +44,23 @@ export const AISearch: FC<AISearchProps> = ({
         <h1 className={onHeaderStyles}>{onHeader}</h1>
         <div className="flex flex-row">
           <div className="z-40 flex flex-wrap content-start gap-2 pl-8 pr-4 w-[55%]">
-            {wordPairs.map((pair: any, indexPair: number) => (
-              <div key={indexPair} className="flex gap-2 text-[20px]">
-                {pair.map((word: string, index: number) => (
-                  <>
-                    <button
-                      key={index}
-                      className={`flex flex-row px-3 py-1 my-auto transition duration-200 transform rounded-full bg-orange opacity-70 hover:scale-105`}
-                      onClick={() => handleWord(word)}>
-                      <p className="">{word}</p>
-                      <button
-                        className="w-[10px] my-auto ml-2"
-                        onClick={() => handleDelete(indexPair, index)}>
-                        <img src={close1} alt="close" />
-                      </button>
-                    </button>
-                  </>
-                ))}
-                {/* <button
-                  className="flex flex-row px-3 py-1 my-auto transition duration-200 transform rounded-full bg-orange opacity-70 hover:scale-105"
-                  onClick={() => handleWord(pair[0])}>
-                  <p className="">{pair[0]}</p>
-                  <button
-                    className="w-[10px] my-auto ml-2"
-                    onClick={() => handleDelete(index, 0)}>
-                    <img src={close1} alt="close" />
-                  </button>
+            {search.map((word: string, index: number) => (
+              <div
+                className="flex flex-row gap-0 text-[20px] transition duration-200 transform rounded-full bg-orange hover:scale-105"
+                key={index}>
+                <button
+                  className={` pl-4 py-1 rounded-lb-full  rounded-lt-full  opacity-70 `}
+                  onClick={() => handleWord(word)}>
+                  <p className="">{word}</p>
                 </button>
                 <button
-                  className="flex flex-row px-3 py-1 my-auto transition duration-200 transform bg-red-300 rounded-full opacity-70 hover:scale-105"
-                  onClick={() => handleWord(pair[1])}>
-                  <p className="">{pair[1]}</p>
-                  <button
-                    className="w-[10px] my-auto ml-2"
-                    onClick={() => handleDelete(index, 1)}>
-                    <img src={close1} alt="close" />
-                  </button>
-                </button> */}
+                  className="h-full my-auto w-[10px] ml-2 mr-4"
+                  onClick={() => handleDelete(index)}>
+                  <img src={close1} alt="close" />
+                </button>
               </div>
             ))}
-            {wordPairs.length > 0 ? (
+            {search.length > 0 ? (
               <button
                 className="flex flex-row px-3 py-2 my-auto transition duration-200 transform bg-black rounded-full opacity-70 hover:scale-105"
                 onClick={handleHistory}>

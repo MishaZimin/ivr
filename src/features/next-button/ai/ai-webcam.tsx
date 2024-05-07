@@ -43,6 +43,10 @@ export const AIWebcam: FC<Props> = ({
   }, []);
 
   useEffect(() => {
+    if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+      return;
+    }
+
     const url = "ws://localhost:8001";
     const ws = new WebSocket(url);
     wsRef.current = ws;
@@ -69,10 +73,6 @@ export const AIWebcam: FC<Props> = ({
 
     ws.onclose = () => {
       console.log("Connection closed");
-    };
-
-    return () => {
-      ws.close();
     };
   }, [onWordPairsChange]);
 
