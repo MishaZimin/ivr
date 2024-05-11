@@ -1,7 +1,14 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const Successfully: FC = () => {
+  const navigate = useNavigate();
+
+  const handleNext = () => {
+    navigate("/catalog", { state: "sign" });
+  };
+
   return (
     <>
       <div className="flex h-full font-circe">
@@ -11,11 +18,11 @@ export const Successfully: FC = () => {
             Теперь вы можете использовать поиск жестами
           </p>
           <div className=" transition duration-200 transform hover:scale-[1.025]">
-            <Link
+            <button
               className="px-7 py-1 font-extrabold rounded-full bottom-1/2 right-12 font-circe bg-orange2 text-[25px]"
-              to="/search">
+              onClick={handleNext}>
               Далее
-            </Link>
+            </button>
           </div>
         </div>
       </div>

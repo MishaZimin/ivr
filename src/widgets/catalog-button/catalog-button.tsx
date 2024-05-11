@@ -9,23 +9,21 @@ type IBtn = {
   count: number;
 };
 
-export const CatalogButton: FC = () => {
+interface ISelection {
+  route: string;
+  select: string;
+  buttons: IBtn[];
+}
+
+export const SignCatalogButton: FC<ISelection> = ({
+  route,
+  select,
+  buttons,
+}) => {
   const navigate = useNavigate();
 
-  const buttons: IBtn[] = [
-    { img: sign2_1, text: "Консультация по паспорту РФ", count: 5 },
-    { img: sign2_1, text: "Консультация по ИНН", count: 10 },
-    { img: sign2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign2_1, text: "Консультация по паспорту РФ", count: 10 },
-  ];
-
   const handleSubcatalog = () => {
-    navigate("/subcatalog");
+    navigate(route, { state: select });
   };
 
   return (
@@ -34,11 +32,18 @@ export const CatalogButton: FC = () => {
         <button
           key={index}
           onClick={handleSubcatalog}
-          className="flex flex-col items-center px-4 pt-4 font-bold text-black transition duration-200 transform rounded-[40px] bg-gradient-to-b from-orange to-white hover:scale-[1.025] shadow-xl">
-          <div className="flex flex-col justify-between pb-8 mt-6 ml-4 text-3xl text-left font-circe">
+          style={{ boxShadow: "4px 4px 24px 0px rgba(0, 0, 0, 0.25)" }}
+          className="flex flex-col items-center px-4 pt-4 font-bold text-black transition duration-200 transform rounded-[28px] bg-gradient-to-b from-white to-white hover:scale-[1.025]">
+          <div className="flex flex-col justify-between pt-6 pb-8 text-3xl text-center font-circe">
             <p>{button.text}</p>
           </div>
-          <img src={button.img} alt={button.text} className="w-3/4 my-auto " />
+          {select === "sign" ? (
+            <img
+              src={button.img}
+              alt={button.text}
+              className="w-3/4 my-auto "
+            />
+          ) : null}
         </button>
       ))}
     </>
