@@ -5,13 +5,13 @@ import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 
 import { Welcome } from "./pages/Welcome/welcome";
-import { TestWebcam } from "./pages/acquaintance/test";
-import { Successfully } from "./pages/successfully/successfully";
-import { SelectionLanguage } from "./pages/selection/selection";
+import { TestWebcam } from "./pages/Acquaintance/test";
+import { Successfully } from "./pages/Successfully/successfully";
+import { SelectionLanguage } from "./pages/Selection/selection";
 
-import { SearchScreen } from "./pages/catalog/catalog";
-import { Subcatalog } from "./pages/subcatalog/subcatalog";
-import { DiscriptionSubcatalog } from "./pages/dscription/discription";
+import { SearchScreen } from "./pages/Catalog/catalog";
+import { Subcatalog } from "./pages/Subcatalog/subcatalog";
+import { DiscriptionSubcatalog } from "./pages/Dscription/discription";
 
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
