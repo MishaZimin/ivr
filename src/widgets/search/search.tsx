@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import sign2_1 from "../../app/img/sign2_1.png";
+// import sign2_1 from "../../app/img/sign2_1.png";
 import portrait1 from "../../app/img/portrait1.png";
 import SearchSymbol from "../../app/img/search-symbol.png";
 

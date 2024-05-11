@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 
-import { Welcome } from "./pages/welcome/welcome";
+import { Welcome } from "./pages/Welcome/welcome";
 import { TestWebcam } from "./pages/acquaintance/test";
 import { Successfully } from "./pages/successfully/successfully";
 import { SelectionLanguage } from "./pages/selection/selection";
