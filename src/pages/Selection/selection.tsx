@@ -1,8 +1,9 @@
 import { FC } from "react";
 
-import Rectangle1 from "../../app/img/Rectangle1.png";
-import Rectangle2 from "../../app/img/Rectangle2.png";
+// import Rectangle1 from "../../app/img/Rectangle1.png";
+// import Rectangle2 from "../../app/img/Rectangle2.png";
 import { SelectionButton } from "../../widgets/slection-button/selection-button";
+import sign2_1 from "../../app/img/sign2_1.png";
 
 export const SelectionLanguage: FC = () => {
   return (
@@ -14,12 +15,12 @@ export const SelectionLanguage: FC = () => {
           </h1>
           <div className="flex justify-center gap-20">
             <SelectionButton
-              img={Rectangle2}
+              img={sign2_1}
               text={"На простом языке"}
               route={"/easy"}
             />
             <SelectionButton
-              img={Rectangle1}
+              img={sign2_1}
               text={"На языке жестов"}
               route={"/test"}
             />

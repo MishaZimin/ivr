@@ -47,7 +47,8 @@ export const AIWebcam: FC<Props> = ({
       return;
     }
 
-    const url = "ws://localhost:8001";
+    // const url = "ws://localhost:8001";
+    const url = "wss://pincode-dev.ru/new_api/";
     const ws = new WebSocket(url);
     wsRef.current = ws;
 

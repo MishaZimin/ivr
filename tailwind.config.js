@@ -34,6 +34,12 @@ module.exports = {
         darkgreyy: "#D9D9D9",
         orange2: "#FFA183",
       },
+      spacing: {
+        sm: "8px",
+        md: "12px",
+        lg: "16px",
+        xl: "24px",
+      },
     },
   },
 };

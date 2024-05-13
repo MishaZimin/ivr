@@ -6,7 +6,7 @@ import Rectangle_3 from "../../app/img/Rectangle_3.png";
 import return1 from "../../app/img/return1.png";
 import { useLocation } from "react-router-dom";
 import { Search } from "../../widgets/search/search";
-
+import { AdditionalInf } from "../../widgets/additional-inf/additional-inf";
 export const DiscriptionSubcatalog: FC = () => {
   const navigate = useNavigate();
 
@@ -29,8 +29,6 @@ export const DiscriptionSubcatalog: FC = () => {
     "- Документ подтверждающий наличие гражданства РФ;",
     "- Документ, подтверждающий регистрацию по месту жительства несовершеннолетнего при наличии",
     "- Госпошлина 300 р, оплачивается в МФЦНесовершеннолетний гражданин приходит лично",
-    "",
-    "Дополнительная информация",
   ];
 
   const handleSubcatalog = () => {
@@ -40,7 +38,7 @@ export const DiscriptionSubcatalog: FC = () => {
   return (
     <>
       <div className="flex flex-col bg-white font-circe">
-        <Search></Search>
+        <Search />
         <button
           onClick={handleSubcatalog}
           style={{ boxShadow: "4px 4px 24px 0px rgba(0, 0, 0, 0.25)" }}
@@ -68,12 +66,15 @@ export const DiscriptionSubcatalog: FC = () => {
           </div>
         ) : null}
 
-        <div className="h-[1px] w-[78%] mx-auto bg-black mb-24"></div>
+        <div className="h-[1px] w-[78%] mx-auto bg-black mb-8"></div>
 
-        <div className="mx-auto w-[83%] text-2xl mb-20">
+        <div className="mx-auto w-[83%] text-2xl mb-20 ">
           {discription.map((text, index) => (
             <div key={index}>{text ? <p>{text}</p> : <br />}</div>
           ))}
+        </div>
+        <div className="w-full">
+          <AdditionalInf language={location.state} />
         </div>
       </div>
     </>
