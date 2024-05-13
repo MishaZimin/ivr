@@ -6,7 +6,7 @@ import Rectangle_3 from "../../app/img/Rectangle_3.png";
 import return1 from "../../app/img/return1.png";
 import { useLocation } from "react-router-dom";
 import { Search } from "../../widgets/search/search";
-import { AdditionalInf } from "../../widgets/additional-inf/additional-inf";
+// import { AdditionalInf } from "../../widgets/additional-inf/additional-inf";
 
 export const AdditionalPage: FC = () => {
   const navigate = useNavigate();
