@@ -12,7 +12,7 @@ import { SelectionLanguage } from "./pages/Selection/selection";
 import { SearchScreen } from "./pages/Catalog/catalog";
 import { Subcatalog } from "./pages/Subcatalog/subcatalog";
 import { DiscriptionSubcatalog } from "./pages/Dscription/discription";
-import { AdditionalPage } from "./pages/Additional/additional-inf";
+import { AdditionalPage } from "./pages/Additional-inf/additional-inf";
 
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
