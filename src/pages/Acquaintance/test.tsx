@@ -1,6 +1,6 @@
 import { useState, useEffect, FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AIWebcam } from "../../features/next-button/ai/ai-webcam";
+import { AIWebcam } from "../../components/ai/ai-webcam";
 
 export const TestWebcam: FC = () => {
   const [wordPairs, setWordPairs] = useState<string[][]>([]);

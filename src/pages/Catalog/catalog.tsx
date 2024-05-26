@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
-import { SignCatalogButton } from "../../widgets/catalog-button/catalog-button";
-import { Search } from "../../widgets/search/search";
+import { SignCatalogButton } from "../../components/catalog-button/catalog-button";
+import { Search } from "../../components/search/search";
 import { useLocation } from "react-router-dom";
 import sign2_1 from "../../app/img/sign2_1.png";
 
@@ -16,19 +16,41 @@ export const SearchScreen: FC = () => {
   // console.log(location.state);
 
   const buttons: IBtn[] = [
-    { img: sign2_1, text: "Консультация по паспорту РФ", count: 5 },
-    { img: sign2_1, text: "Консультация по ИНН", count: 10 },
-    { img: sign2_1, text: "Консультация по загранпаспорту", count: 10 },
     {
-      img: sign2_1,
+      img: "https://storage.yandexcloud.net/akhidov-ivr/9.1.mp4",
+      text: "Консультация по паспорту РФ",
+      count: 5,
+    },
+    {
+      img: "https://storage.yandexcloud.net/akhidov-ivr/10.1.mp4",
+      text: "Консультация по ИНН",
+      count: 10,
+    },
+    {
+      img: "https://storage.yandexcloud.net/akhidov-ivr/11.1.mp4",
+      text: "Консультация по загранпаспорту",
+      count: 10,
+    },
+    {
+      img: "https://storage.yandexcloud.net/akhidov-ivr/12.1.mp4",
       text: "Консультация по водительскому удостоверению",
       count: 10,
     },
-    { img: sign2_1, text: "Консультация по регистрационному учету", count: 10 },
-    { img: sign2_1, text: "Консультация по судимости", count: 10 },
-    { img: sign2_1, text: "Консультация по СНИЛС", count: 10 },
-    { img: sign2_1, text: "Консультация по паспорту РФ", count: 10 },
-    { img: sign2_1, text: "Консультация по паспорту РФ", count: 10 },
+    {
+      img: "https://storage.yandexcloud.net/akhidov-ivr/13.1.mp4",
+      text: "Консультация по регистрационному учету",
+      count: 10,
+    },
+    {
+      img: "https://storage.yandexcloud.net/akhidov-ivr/14.1.mp4",
+      text: "Консультация по судимости",
+      count: 10,
+    },
+    {
+      img: "https://storage.yandexcloud.net/akhidov-ivr/15.1.mp4",
+      text: "Консультация по СНИЛС",
+      count: 10,
+    },
   ];
 
   return (

@@ -1,9 +1,10 @@
 import { FC, useState } from "react";
 // import sign2_1 from "../../app/img/sign2_1.png";
 import portrait1 from "../../app/img/portrait1.png";
+import close from "../../app/img/close.png";
 import SearchSymbol from "../../app/img/search-symbol.png";
-
-import { AISearch } from "../../widgets/ai/ai-search";
+import { IoMdClose } from "react-icons/io";
+import { AISearch } from "../ai/ai-search";
 
 export const Search: FC = () => {
   const [search, setSearch] = useState<boolean>(false);
@@ -13,8 +14,13 @@ export const Search: FC = () => {
     if (!search) setSelectedWord("");
     setSearch(search ? false : true);
   };
+
   const handleSearch = () => {
     if (search) setSearch(false);
+  };
+
+  const handleCleare = () => {
+    setSelectedWord("");
   };
 
   const handleWordSelection = (word: string) => {
@@ -27,12 +33,17 @@ export const Search: FC = () => {
     <>
       <div className="flex flex-row mt-20 justify-between w-[80%] h-16 bg-darkgreyy rounded-full left-[10%] z-30 mx-auto">
         <input
-          className="w-[85%] px-8 text-3xl rounded-[36px] bg-darkgreyy focus:border-redd"
+          className="w-[80%] px-8 text-3xl rounded-[36px] bg-darkgreyy focus:border-redd"
           placeholder="Найти..."
           value={selectedWord}
           onChange={(event) => setSelectedWord(event.target.value)}
         />
-        <div className="flex flex-row w-[15%] justify-end">
+        <div className="flex flex-row w-[20%] justify-end">
+          <button
+            onClick={handleCleare}
+            className="flex my-auto pr-2 mr-4 justify-end transition duration-200 transform hover:scale-105 w-[35%]">
+            <img className="h-6 " src={close} alt="close" />
+          </button>
           <button
             onClick={handleSearch}
             className="flex my-auto pr-2 justify-end transition duration-200 transform hover:scale-105 w-[35%]">

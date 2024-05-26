@@ -5,9 +5,9 @@ import portrait1 from "../../app/img/portrait1.png";
 import sign2_1 from "../../app/img/sign2_1.png";
 import return1 from "../../app/img/return1.png";
 import { useLocation } from "react-router-dom";
-import { AISearch } from "../../widgets/ai/ai-search";
+import { AISearch } from "../../components/ai/ai-search";
 import { useNavigate } from "react-router-dom";
-import { SignCatalogButton } from "../../widgets/catalog-button/catalog-button";
+import { SignCatalogButton } from "../../components/catalog-button/catalog-button";
 
 type IBtn = {
   img: string;

@@ -5,8 +5,10 @@ import sign_2_1 from "../../app/img/sign_2_1.svg";
 import Rectangle_3 from "../../app/img/Rectangle_3.png";
 import return1 from "../../app/img/return1.png";
 import { useLocation } from "react-router-dom";
-import { Search } from "../../widgets/search/search";
-import { AdditionalInf } from "../../widgets/additional-inf/additional-inf";
+import { Search } from "../../components/search/search";
+import { AdditionalInf } from "../../components/additional-inf/additional-inf";
+import { AutoPlayVideo } from "../../components/sign-video/sign-video";
+import { BackBtn } from "../../components/btn/back-btn";
 export const DiscriptionSubcatalog: FC = () => {
   const navigate = useNavigate();
 
@@ -14,7 +16,7 @@ export const DiscriptionSubcatalog: FC = () => {
   // console.log(location.state);
 
   const subcatalog = {
-    img: sign_2_1,
+    img: "https://storage.yandexcloud.net/akhidov-ivr/9.1.mp4",
     text: "Достижение 14 лет",
     count: 10,
   };
@@ -39,26 +41,36 @@ export const DiscriptionSubcatalog: FC = () => {
     <>
       <div className="flex flex-col bg-white font-circe">
         <Search />
-        <button
+        {/* <button
           onClick={handleSubcatalog}
           style={{ boxShadow: "4px 4px 24px 0px rgba(0, 0, 0, 0.25)" }}
-          className="flex flex-row relative w-[85%] mt-16 mb-20 mx-auto items-center px-4 pt-4 font-bold text-black transition duration-200 transform rounded-[40px] bg-white hover:scale-[1.025] shadow-xl">
+          className="flex flex-row relative w-[85%] mt-16 mb-20 mx-auto items-center px-4 py-4 font-bold text-black transition duration-200 transform rounded-[40px] bg-white hover:scale-[1.025] shadow-xl">
           <img
             className="absolute w-8 top-14 left-8"
             src={return1}
             alt="return1"
           />
           {location.state === "sign" ? (
-            <img
-              src={subcatalog.img}
-              alt={subcatalog.text}
-              className="w-1/2 pl-12 my-auto"
-            />
+            // <img
+            //   src={subcatalog.img}
+            //   alt={subcatalog.text}
+            //   className="w-1/3 pl-12 my-auto"
+            // />
+            <div className="w-1/2 pl-40 my-auto">
+              <AutoPlayVideo video={subcatalog.img} />
+            </div>
           ) : null}
-          <div className="flex flex-col justify-between pb-8 pl-12 mt-6 ml-4 text-[45px] text-left">
+          <div className="flex flex-col justify-between px-12 pb-8 pt-4 text-[50px] text-left mx-auto">
             <p>{subcatalog.text}</p>
           </div>
-        </button>
+        </button> */}
+        <div className="mb-20">
+          <BackBtn
+            state={location.state}
+            video={subcatalog.img}
+            text={subcatalog.text}
+          />
+        </div>
 
         {location.state === "sign" ? (
           <div className="mx-auto max-w-[75%] mb-12">

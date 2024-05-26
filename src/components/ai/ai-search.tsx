@@ -1,6 +1,6 @@
 import { useState, FC } from "react";
 
-import { AIWebcam } from "../../features/next-button/ai/ai-webcam";
+import { AIWebcam } from "./ai-webcam";
 
 import close1 from "../../app/img/close1.png";
 import history1 from "../../app/img/history1.png";

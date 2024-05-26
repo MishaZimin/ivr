@@ -1,0 +1,23 @@
+.video-player::-webkit-media-controls {
+  display: none !important;
+}
+
+.video-player::-moz-media-controls {
+  display: none !important;
+}
+
+.video-player::-ms-media-controls {
+  display: none !important;
+}
+
+.video-player::media-controls {
+  display: none !important;
+}
+
+.group:hover .video-player {
+  pointer-events: auto;
+}
+
+.group .video-player {
+  pointer-events: none;
+}

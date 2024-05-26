@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { NextButton } from "../../features/next-button/next-button";
+import { NextButton } from "../../components/next-button/next-button";
 import happyWomen from "../../app/img/happyWomen.png";
 import Ellipse3 from "../../app/img/Ellipse.png";
 
@@ -19,10 +19,10 @@ export const Welcome: FC = () => {
         </div> */}
 
         <div className="absolute flex flex-col right-4 top-16 w-[50%]">
-          <h1 className="mb-6 text-[65px] font-circe font-extrabold z-80">
+          <h1 className="mb-6 text-[65px] font-circe font-extrabold z-80 w-[70%] ml-[15%]">
             Здесь
           </h1>
-          <h2 className="mb-6 text-[65px] font-circe font-extrabold z-80">
+          <h2 className="mb-6 text-[65px] font-circe font-extrabold z-80 leading-none w-[70%] ml-[15%]">
             Ты можешь обратиться на языке жестов
           </h2>
         </div>
@@ -32,12 +32,12 @@ export const Welcome: FC = () => {
         </div>
 
         <img
-          className="absolute bottom-0 left-0 z-50 w-[38%]"
+          className="absolute bottom-0 left-0 z-50 h-[90%]"
           src={happyWomen}
           alt="happyWomen"
         />
         <img
-          className="absolute bottom-0 left-0 z-0 w-[45%]"
+          className="absolute bottom-0 left-0 z-0 h-[98%]"
           src={Ellipse3}
           alt="Ellipse3"
         />

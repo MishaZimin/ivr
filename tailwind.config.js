@@ -4,6 +4,10 @@ module.exports = {
   plugins: [require("tailwindcss-animated")],
   theme: {
     extend: {
+      lineHeight: {
+        "extra-relaxed": "1",
+        "super-relaxed": "2",
+      },
       fontFamily: {
         monserrat: "Montserrat",
         circe: ["Circe-Regular"],

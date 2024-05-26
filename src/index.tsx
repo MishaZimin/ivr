@@ -14,6 +14,7 @@ import { Subcatalog } from "./pages/Subcatalog/subcatalog";
 import { DiscriptionSubcatalog } from "./pages/Dscription/discription";
 import { AdditionalPage } from "./pages/Additional-inf/additional-inf";
 
+import { ScrollToTop } from "./components/scroll-to-top";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 
@@ -24,6 +25,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/selection" element={<SelectionLanguage />} />

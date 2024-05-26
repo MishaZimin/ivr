@@ -39,6 +39,7 @@ export const AIWebcam: FC<Props> = ({
 
     if (imageSrc) {
       wsRef.current.send(imageSrc.slice(23));
+      // wsRef.current.send(imageSrc);
     }
   }, []);
 
@@ -75,6 +76,10 @@ export const AIWebcam: FC<Props> = ({
     ws.onclose = () => {
       console.log("Connection closed");
     };
+
+    // return () => {
+    //   ws.close();
+    // };
   }, [onWordPairsChange]);
 
   useEffect(() => {
