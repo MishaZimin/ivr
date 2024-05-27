@@ -60,6 +60,7 @@ export const SearchScreen: FC = () => {
   return (
     <div className="flex flex-col bg-white font-circe">
       <Search />
+
       <div className="flex flex-col mb-12">
         <div className="w-[90%] mx-auto mt-12 h-20 mb-12 flex justify-center font-normal text-[45px] font-circeb">
           <h1>По какому вопросу ваше обращение?</h1>

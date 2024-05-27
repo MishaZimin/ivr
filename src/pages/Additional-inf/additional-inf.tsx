@@ -52,7 +52,7 @@ export const AdditionalPage: FC = () => {
         <Search />
 
         {subcatalog && (
-          <div className="relative z-20 mb-20">
+          <div className="relative mb-20">
             {location.state !== "sign" ? <GrayBlock /> : null}
 
             <BackBtn

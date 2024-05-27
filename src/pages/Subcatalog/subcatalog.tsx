@@ -95,7 +95,7 @@ export const Subcatalog: FC = () => {
         </div> */}
 
         {header && (
-          <div className="relative z-20 mb-12">
+          <div className="relative mb-12 ">
             {select.state !== "sign" ? <GrayBlock /> : null}
 
             <BackBtn
