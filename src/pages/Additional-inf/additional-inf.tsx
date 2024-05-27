@@ -1,59 +1,79 @@
-import { FC } from "react";
-import { useNavigate } from "react-router-dom";
+import { FC, useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
-import sign_2_1 from "../../app/img/sign_2_1.svg";
-import Rectangle_3 from "../../app/img/Rectangle_3.png";
-import return1 from "../../app/img/return1.png";
-import { useLocation } from "react-router-dom";
 import { Search } from "../../components/search/search";
-// import { AdditionalInf } from "../../widgets/additional-inf/additional-inf";
 import { BackBtn } from "../../components/btn/back-btn";
+import { AutoPlayVideo } from "../../components/sign-video/sign-video";
+import Rectangle_3 from "../../app/img/Rectangle_3.png";
+
+import { GrayBlock } from "../../components/gray-block/gray-block";
+
+type Subcatalog = {
+  img: string;
+  text: string;
+  count: number;
+};
 
 export const AdditionalPage: FC = () => {
   const navigate = useNavigate();
-
   const location = useLocation();
-  // console.log(location.state);
 
-  const subcatalog = {
-    img: "https://storage.yandexcloud.net/akhidov-ivr/9.1.mp4",
-    text: "Дополнительная информация",
-    count: 10,
-  };
+  const [subcatalog, setSubcatalog] = useState<Subcatalog | null>(null);
+  const [discriptionVideo, setDiscriptionVideo] = useState<string>("");
 
-  const discription = [
-    "Госпошлина",
-    "",
-    "За выдачу российского национального водительского удостоверения размер государственной пошлины составляет 2000 рублей.",
-    "",
-    "За выдачу международного водительского удостоверения составляет 1600 рублей",
-  ];
+  const [discription, setDiscription] = useState<string[]>([]);
 
-  const handleSubcatalog = () => {
-    navigate(-1);
-  };
+  useEffect(() => {
+    const subcatalogData: Subcatalog = {
+      img: "https://storage.yandexcloud.net/akhidov-ivr/9.1.mp4",
+      text: "Дополнительная информация",
+      count: 10,
+    };
+    const discriptionVideoData =
+      "https://storage.yandexcloud.net/akhidov-ivr/9.1.mp4";
+
+    const discriptionData = [
+      "Госпошлина",
+      "",
+      "За выдачу российского национального водительского удостоверения размер государственной пошлины составляет 2000 рублей.",
+      "",
+      "За выдачу международного водительского удостоверения составляет 1600 рублей",
+    ];
+
+    setSubcatalog(subcatalogData);
+    setDiscriptionVideo(discriptionVideoData);
+
+    setDiscription(discriptionData);
+  }, []);
 
   return (
     <>
       <div className="flex flex-col bg-white font-circe">
         <Search />
 
-        <div className="mb-20">
-          <BackBtn
-            state={location.state}
-            video={subcatalog.img}
-            text={subcatalog.text}
-          />
-        </div>
+        {subcatalog && (
+          <div className="relative z-20 mb-20">
+            {location.state !== "sign" ? <GrayBlock /> : null}
+
+            <BackBtn
+              state={location.state}
+              video={subcatalog.img}
+              text={subcatalog.text}
+            />
+          </div>
+        )}
+
+        {/* <div className="absolute z-10 w-full h-40 bg-darkgreyy top-[350px]"></div> */}
+
+        {location.state === "sign" && discriptionVideo && (
+          <div className="mx-auto max-w-[65%] mb-12">
+            <AutoPlayVideo video={discriptionVideo} />
+          </div>
+        )}
+
         <div className="h-[1px] w-[78%] mx-auto bg-black mb-12"></div>
 
-        {location.state === "sign" ? (
-          <div className="mx-auto max-w-[75%] mb-12">
-            <img src={Rectangle_3} alt="Rectangle_3" />
-          </div>
-        ) : null}
-
-        <div className="mx-auto w-[83%] text-2xl mb-20 ">
+        <div className="mx-auto w-[83%] text-2xl mb-20">
           {discription.map((text, index) => (
             <div key={index}>{text ? <p>{text}</p> : <br />}</div>
           ))}

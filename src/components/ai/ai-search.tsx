@@ -40,7 +40,7 @@ export const AISearch: FC<AISearchProps> = ({
 
   return (
     <>
-      <div className="flex flex-col pt-14 bg-greyy rounded-tr-[17px] rounded-tl-[17px] rounded-br-[36px] rounded-bl-[36px] pb-8 relative shadow-xl font-circe">
+      <div className=" flex flex-col pt-14 bg-greyy rounded-tr-[17px] rounded-tl-[17px] rounded-br-[36px] rounded-bl-[36px] pb-8 relative shadow-xl font-circe">
         <h1 className={onHeaderStyles}>{onHeader}</h1>
         <div className="flex flex-row">
           <div className="z-40 flex flex-wrap content-start gap-2 pl-8 pr-4 w-[55%]">
@@ -73,7 +73,7 @@ export const AISearch: FC<AISearchProps> = ({
             ) : null}
           </div>
 
-          <div className="w-[45%] pr-8 rounded-2xl">
+          <div className="w-[45%] pr-8 rounded-2xl ">
             <AIWebcam
               onWordPairsChange={handleWordPairsChange}
               onHeight={720}

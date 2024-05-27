@@ -1,36 +1,27 @@
 import { useState, useEffect, FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AIWebcam } from "../../components/ai/ai-webcam";
+import { Search } from "../../components/search/search";
+
+import { AISearch } from "../../components/ai/ai-search";
 
 export const TestWebcam: FC = () => {
-  const [wordPairs, setWordPairs] = useState<string[][]>([]);
   const navigate = useNavigate();
 
-  const handleWordPairsChange = (newWordPairs: string[]) => {
-    setWordPairs((prevWord) => [...prevWord, newWordPairs]);
+  const handleWordSelection = (word: string) => {
+    const wordNext = "привет";
+    if (word === wordNext) navigate("/successfully");
   };
-
-  useEffect(() => {
-    const word = "дом";
-    const foundWord = wordPairs.some((pair) => pair.includes(word));
-
-    if (foundWord) navigate("/successfully");
-  }, [navigate, wordPairs]);
 
   return (
     <>
-      <div className="flex h-full ">
-        <div className="flex flex-col pt-[5%] mx-auto">
-          <h1 className="text-[35px] text-center mb-10 font-circe font-bold">
-            Чтобы начать, покажите в камеру жест "Дом"
-          </h1>
-          <div className="relative flex w-3/4 mx-auto">
-            <AIWebcam
-              onWordPairsChange={handleWordPairsChange}
-              onHeight={720}
-              onWidth={1080}
-            />
-          </div>
+      <div className="flex h-screen ">
+        <div className="flex flex-col w-[70%] pb-8 mx-auto my-auto">
+          <AISearch
+            onWordSelect={handleWordSelection}
+            onHeader="Чтобы начать, покажите в камеру жест Привет"
+            onHeaderStyles="text-[35px] font-light mx-auto font-circeb mb-8"
+          />
         </div>
         <Link
           className="absolute bg-white text-[25px] font-normal bottom-1/2 right-12 font-circe"

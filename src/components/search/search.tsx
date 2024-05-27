@@ -31,7 +31,7 @@ export const Search: FC = () => {
 
   return (
     <>
-      <div className="flex flex-row mt-20 justify-between w-[80%] h-16 bg-darkgreyy rounded-full left-[10%] z-30 mx-auto">
+      <div className="z-200 flex flex-row mt-20 justify-between w-[80%] h-16 bg-darkgreyy rounded-full left-[10%] z-30 mx-auto">
         <input
           className="w-[80%] px-8 text-3xl rounded-[36px] bg-darkgreyy focus:border-redd"
           placeholder="Найти..."
@@ -41,7 +41,7 @@ export const Search: FC = () => {
         <div className="flex flex-row w-[20%] justify-end">
           <button
             onClick={handleCleare}
-            className="flex my-auto pr-2 mr-4 justify-end transition duration-200 transform hover:scale-105 w-[35%]">
+            className="flex my-auto pr-0 mr-0 justify-end transition duration-200 transform hover:scale-105 w-[35%]">
             <img className="h-6 " src={close} alt="close" />
           </button>
           <button
@@ -66,7 +66,7 @@ export const Search: FC = () => {
           <AISearch
             onWordSelect={handleWordSelection}
             onHeader="Покажите ваш запрос"
-            onHeaderStyles="text-[50px] text-extrabold mx-auto"
+            onHeaderStyles="text-[50px] text-normal mx-auto font-circeb"
           />
         </div>
       ) : null}

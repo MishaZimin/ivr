@@ -141,22 +141,6 @@ export const AdditionalCatalog: FC = () => {
                   select={select.state}
                   buttons={buttons}
                 />
-
-                {/* {buttons.map((button, index) => (
-                  <button
-                    key={index}
-                    onClick={handleDiscriptionSub}
-                    className="flex flex-col items-center px-4 pt-4 font-bold text-black transition duration-200 transform rounded-[40px] bg-white hover:scale-[1.025] shadow-xl">
-                    <div className="flex flex-col justify-between pb-8 mt-6 ml-4 text-3xl text-left">
-                      <p>{button.text}</p>
-                    </div>
-                    <img
-                      src={button.img}
-                      alt={button.text}
-                      className="w-3/4 my-auto "
-                    />
-                  </button>
-                ))} */}
               </div>
             </div>
           </div>

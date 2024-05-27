@@ -1,94 +1,78 @@
-import { FC } from "react";
-import { useNavigate } from "react-router-dom";
-
-import sign_2_1 from "../../app/img/sign_2_1.svg";
-import Rectangle_3 from "../../app/img/Rectangle_3.png";
-import return1 from "../../app/img/return1.png";
+import { FC, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Search } from "../../components/search/search";
 import { AdditionalInf } from "../../components/additional-inf/additional-inf";
-import { AutoPlayVideo } from "../../components/sign-video/sign-video";
 import { BackBtn } from "../../components/btn/back-btn";
+import { AutoPlayVideo } from "../../components/sign-video/sign-video";
+
+type Subcatalog = {
+  img: string;
+  text: string;
+  count: number;
+};
+
 export const DiscriptionSubcatalog: FC = () => {
-  const navigate = useNavigate();
-
   const location = useLocation();
-  // console.log(location.state);
+  const [subcatalog, setSubcatalog] = useState<Subcatalog | null>(null);
+  const [discriptionVideo, setDiscriptionVideo] = useState<string>("");
+  const [discription, setDiscription] = useState<string[]>([]);
 
-  const subcatalog = {
-    img: "https://storage.yandexcloud.net/akhidov-ivr/9.1.mp4",
-    text: "Достижение 14 лет",
-    count: 10,
-  };
+  useEffect(() => {
+    const subcatalogData: Subcatalog = {
+      img: "https://storage.yandexcloud.net/akhidov-ivr/9.1.mp4",
+      text: "Достижение 14 лет",
+      count: 10,
+    };
 
-  const discription = [
-    "Подать заявление на оформление паспорта подостижению 14 лет можно на следующий день после наступления события.",
-    "",
-    "Для этого Вам потребуется:",
-    "- 2 личные фотографии 3,5 на 4,5 см матовые на белом фоне в цветном или чёрно-беломисполнении",
-    "",
-    "- Свидетельство о рождении заявителя;",
-    "- Документ подтверждающий наличие гражданства РФ;",
-    "- Документ, подтверждающий регистрацию по месту жительства несовершеннолетнего при наличии",
-    "- Госпошлина 300 р, оплачивается в МФЦНесовершеннолетний гражданин приходит лично",
-  ];
+    const discriptionVideoData =
+      "https://storage.yandexcloud.net/akhidov-ivr/9.1.mp4";
 
-  const handleSubcatalog = () => {
-    navigate(-1);
-  };
+    const discriptionData = [
+      "Подать заявление на оформление паспорта подостижению 14 лет можно на следующий день после наступления события.",
+      "",
+      "Для этого Вам потребуется:",
+      "- 2 личные фотографии 3,5 на 4,5 см матовые на белом фоне в цветном или чёрно-беломисполнении",
+      "",
+      "- Свидетельство о рождении заявителя;",
+      "- Документ подтверждающий наличие гражданства РФ;",
+      "- Документ, подтверждающий регистрацию по месту жительства несовершеннолетнего при наличии",
+      "- Госпошлина 300 р, оплачивается в МФЦНесовершеннолетний гражданин приходит лично",
+    ];
+
+    setSubcatalog(subcatalogData);
+    setDiscriptionVideo(discriptionVideoData);
+    setDiscription(discriptionData);
+  }, []);
 
   return (
-    <>
-      <div className="flex flex-col bg-white font-circe">
-        <Search />
-        {/* <button
-          onClick={handleSubcatalog}
-          style={{ boxShadow: "4px 4px 24px 0px rgba(0, 0, 0, 0.25)" }}
-          className="flex flex-row relative w-[85%] mt-16 mb-20 mx-auto items-center px-4 py-4 font-bold text-black transition duration-200 transform rounded-[40px] bg-white hover:scale-[1.025] shadow-xl">
-          <img
-            className="absolute w-8 top-14 left-8"
-            src={return1}
-            alt="return1"
-          />
-          {location.state === "sign" ? (
-            // <img
-            //   src={subcatalog.img}
-            //   alt={subcatalog.text}
-            //   className="w-1/3 pl-12 my-auto"
-            // />
-            <div className="w-1/2 pl-40 my-auto">
-              <AutoPlayVideo video={subcatalog.img} />
-            </div>
-          ) : null}
-          <div className="flex flex-col justify-between px-12 pb-8 pt-4 text-[50px] text-left mx-auto">
-            <p>{subcatalog.text}</p>
-          </div>
-        </button> */}
-        <div className="mb-20">
+    <div className="flex flex-col bg-white font-circe">
+      <Search />
+
+      <div className="mb-20 ">
+        {subcatalog && (
           <BackBtn
             state={location.state}
             video={subcatalog.img}
             text={subcatalog.text}
           />
-        </div>
-
-        {location.state === "sign" ? (
-          <div className="mx-auto max-w-[75%] mb-12">
-            <img src={Rectangle_3} alt="Rectangle_3" />
-          </div>
-        ) : null}
-
-        <div className="h-[1px] w-[78%] mx-auto bg-black mb-8"></div>
-
-        <div className="mx-auto w-[83%] text-2xl mb-20 ">
-          {discription.map((text, index) => (
-            <div key={index}>{text ? <p>{text}</p> : <br />}</div>
-          ))}
-        </div>
-        <div className="w-full">
-          <AdditionalInf language={location.state} />
-        </div>
+        )}
+        {/* <div className=" z-0 w-full h-40 bg-darkgreyy top-[350px]"></div> */}
       </div>
-    </>
+
+      {location.state === "sign" && discriptionVideo && (
+        <div className="mx-auto max-w-[65%] mb-12">
+          <AutoPlayVideo video={discriptionVideo} />
+        </div>
+      )}
+      <div className="h-[1px] w-[78%] mx-auto bg-black mb-8"></div>
+      <div className="mx-auto w-[83%] text-2xl mb-20">
+        {discription.map((text, index) => (
+          <div key={index}>{text ? <p>{text}</p> : <br />}</div>
+        ))}
+      </div>
+      <div className="w-full">
+        <AdditionalInf language={location.state} />
+      </div>
+    </div>
   );
 };

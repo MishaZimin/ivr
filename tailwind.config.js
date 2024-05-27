@@ -10,6 +10,7 @@ module.exports = {
       },
       fontFamily: {
         monserrat: "Montserrat",
+        circeb: ["Circe-ExtraBold"],
         circe: ["Circe-Regular"],
       },
       animation: {
@@ -37,6 +38,8 @@ module.exports = {
         greyy: "#F4F4F4",
         darkgreyy: "#D9D9D9",
         orange2: "#FFA183",
+        lightred2: "#fcedeb",
+        lightgray: "#E5E5E5",
       },
       spacing: {
         sm: "8px",
