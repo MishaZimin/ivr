@@ -58,15 +58,15 @@ export const DiscriptionSubcatalog: FC = () => {
       }
 
       const subcatalogData: Subcatalog = {
-        img:
-          language === "sign"
-            ? data.description_video
-            : data.description_video_sl,
+        // img:
+        //   language === "sign"
+        //     ? data.description_video
+        //     : data.description_video_sl,
+        img: language === "sign" ? data.full_video : "",
         text: language === "sign" ? data.question : data.question_sl,
       };
 
-      const discriptionVideoData =
-        "https://storage.yandexcloud.net/akhidov-ivr/9.1.mp4";
+      const discriptionVideoData = language === "sign" ? data.full_video : "";
 
       // const discriptionData = [
       //   "Подать заявление на оформление паспорта подостижению 14 лет можно на следующий день после наступления события.",
@@ -107,7 +107,7 @@ export const DiscriptionSubcatalog: FC = () => {
       </div>
 
       {language === "sign" && (
-        <div className="mx-auto max-w-[65%] mb-12">
+        <div className="mx-auto max-w-[55%] mb-12">
           <AutoPlayVideo video={discriptionVideo} />
         </div>
       )}

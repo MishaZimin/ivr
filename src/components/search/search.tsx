@@ -76,21 +76,25 @@ export const Search: FC = () => {
       <div className="mb-40">
         <div className=" absolute flex flex-row mt-20 justify-between w-[80%] h-16 bg-darkgreyy rounded-full left-[10%] z-20 mx-auto">
           <input
-            className="w-[80%] px-8 text-3xl rounded-[36px] bg-darkgreyy focus:border-redd "
+            className="w-[85%] px-8 text-3xl rounded-[36px] bg-darkgreyy focus:border-redd mr-2"
             placeholder="Найти..."
             value={selectedWord}
             onChange={(event) => setSelectedWord(event.target.value)}
           />
-          <div className="flex flex-row w-[20%] justify-end">
+          <div className="flex flex-row w-[15%] justify-end">
             <button
               onClick={handleCleare}
-              className="flex my-auto pr-0 mr-0 justify-end transition duration-200 transform hover:scale-105 w-[35%]">
-              <img className="h-6 " src={close} alt="close" />
+              className="flex my-auto pr-0 mr-0 justify-end transition duration-200 transform hover:scale-105 w-[25%]">
+              <img className="h-6 mx-auto" src={close} alt="close" />
             </button>
             <button
               onClick={handleSearch}
-              className="flex my-auto pr-2 justify-end transition duration-200 transform hover:scale-105 w-[35%]">
-              <img className="h-8" src={SearchSymbol} alt="SearchSymbol" />
+              className="flex my-auto pr-0 justify-end transition duration-200 transform hover:scale-105 w-[25%]">
+              <img
+                className="h-8 mx-auto"
+                src={SearchSymbol}
+                alt="SearchSymbol"
+              />
             </button>
 
             <button
