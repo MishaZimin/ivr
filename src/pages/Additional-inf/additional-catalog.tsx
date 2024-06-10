@@ -136,11 +136,7 @@ export const AdditionalCatalog: FC = () => {
           <div className={search ? "blur-[2px]" : "blur-none"}>
             <div className="container mx-auto">
               <div className="grid grid-cols-2 gap-8 ">
-                <SignCatalogButton
-                  route="/discriptionsub"
-                  select={select.state}
-                  buttons={buttons}
-                />
+                <SignCatalogButton route="/discriptionsub" buttons={buttons} />
               </div>
             </div>
           </div>

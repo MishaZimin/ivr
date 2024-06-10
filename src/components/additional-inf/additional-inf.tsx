@@ -3,12 +3,10 @@ import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 
-interface IAdditional {
-  language: string;
-}
-
-export const AdditionalInf: FC<IAdditional> = ({ language }) => {
+export const AdditionalInf: FC = () => {
   const navigate = useNavigate();
+
+  const language = localStorage.getItem("language");
 
   const handleNext = () => {
     navigate("/additional", { state: language });

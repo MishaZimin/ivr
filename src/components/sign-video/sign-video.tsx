@@ -17,7 +17,7 @@ export const AutoPlayVideo: React.FC<VideoPlayerProps> = ({ video }) => {
           if (entry.isIntersecting) {
             if (videoElement.paused) {
               videoElement.play().catch((error) => {
-                console.error("Failed to play video:", error);
+                // console.error("Failed to play video:", error);
               });
             }
           } else {
@@ -46,16 +46,18 @@ export const AutoPlayVideo: React.FC<VideoPlayerProps> = ({ video }) => {
   }, []);
 
   return (
-    <div className="relative overflow-hidden group">
-      <video
-        ref={videoRef}
-        className="w-full h-auto rounded-2xl video-player"
-        autoPlay
-        muted
-        loop>
-        <source src={video} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+    <div className="">
+      {video ? (
+        <video
+          ref={videoRef}
+          className=" rounded-2xl video-player"
+          autoPlay
+          muted
+          loop>
+          <source src={video} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      ) : null}
     </div>
   );
 };

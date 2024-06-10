@@ -1,75 +1,75 @@
 import { FC, useEffect, useState } from "react";
 
-import sign2_1 from "../../app/img/sign2_1.png";
-import return1 from "../../app/img/return1.png";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { SignCatalogButton } from "../../components/catalog-button/catalog-button";
 import { Search } from "../../components/search/search";
 import { BackBtn } from "../../components/btn/back-btn";
-import { AutoPlayVideo } from "../../components/sign-video/sign-video";
 import { GrayBlock } from "../../components/gray-block/gray-block";
 
 type IBtn = {
   img: string;
   text: string;
-  count: number;
 };
 
 export const Subcatalog: FC = () => {
   const navigate = useNavigate();
-  const select = useLocation();
+  const topic = useLocation();
+
+  const language = localStorage.getItem("language");
+
   const [header, setHeader] = useState<IBtn | null>(null);
   const [buttons, setButtons] = useState<IBtn[]>([]);
 
-  useEffect(() => {
+  const data = JSON.parse(localStorage.getItem("data") || "[]");
+
+  const createSections = (
+    topic: string
+  ): { subcatalog: IBtn; buttons: IBtn[] } | null => {
+    const selectedTopic = data.find(
+      (item: { topic: string }) => item.topic === topic
+    );
+    if (!selectedTopic) return null;
+
     const subcatalog: IBtn = {
-      img: "https://storage.yandexcloud.net/akhidov-ivr/9.1.mp4",
-      text: "Консультация по паспорту РФ",
-      count: 10,
+      img:
+        language === "sign"
+          ? selectedTopic.topic_video || "default_image_url"
+          : selectedTopic.topic_icon || "default_image_url",
+      text: selectedTopic.topic,
     };
-    const buttons: IBtn[] = [
-      {
-        img: "https://storage.yandexcloud.net/akhidov-ivr/9.1.mp4",
-        text: "Достижение 14 лет",
-        count: 10,
-      },
-      {
-        img: "https://storage.yandexcloud.net/akhidov-ivr/9.1.mp4",
-        text: "Достижение 20 лет/40 лет",
-        count: 5,
-      },
-      {
-        img: "https://storage.yandexcloud.net/akhidov-ivr/9.1.mp4",
-        text: "Изменились персональные данные",
-        count: 10,
-      },
-      {
-        img: "https://storage.yandexcloud.net/akhidov-ivr/9.1.mp4",
-        text: "Изменение внешности",
-        count: 10,
-      },
-      {
-        img: "https://storage.yandexcloud.net/akhidov-ivr/9.1.mp4",
-        text: "Непригодность паспорта",
-        count: 10,
-      },
-      {
-        img: "https://storage.yandexcloud.net/akhidov-ivr/9.1.mp4",
-        text: "Опечатка в паспорте",
-        count: 10,
-      },
-      {
-        img: "https://storage.yandexcloud.net/akhidov-ivr/9.1.mp4",
-        text: "Паспорт украден/утерян",
-        count: 10,
-      },
-      {
-        img: "https://storage.yandexcloud.net/akhidov-ivr/9.1.mp4",
-        text: "Смена пола",
-        count: 10,
-      },
-    ];
+
+    const buttons: IBtn[] = selectedTopic.sections1.map(
+      (section: any, index: string | number) =>
+        language === "sign"
+          ? {
+              img:
+                selectedTopic.sections1_videos &&
+                selectedTopic.sections1_videos[index]
+                  ? selectedTopic.sections1_videos[index]
+                  : "default_image_url",
+              text: section,
+            }
+          : {
+              img:
+                selectedTopic.sections1_icons &&
+                selectedTopic.sections1_icons[index]
+                  ? selectedTopic.sections1_icons[index]
+                  : "default_image_url",
+              text: section,
+            }
+    );
+
+    return { subcatalog, buttons };
+  };
+
+  useEffect(() => {
+    const data = createSections(topic.state.header);
+
+    const buttons: any = data?.buttons;
+    const subcatalog: any = data?.subcatalog;
 
     setHeader(subcatalog);
     setButtons(buttons);
@@ -80,33 +80,13 @@ export const Subcatalog: FC = () => {
       <div className="flex flex-col bg-white font-circe">
         <Search />
 
-        {/* {header && (
-          <BackBtn state={select.state} video={header.img} text={header.text} />
-        )} */}
-
-        {/* <div className="z-20 ">
-          {header && (
-            <BackBtn
-              state={select.state}
-              video={header.img}
-              text={header.text}
-            />
-          )}
-        </div> */}
-
         {header && (
           <div className="relative mb-12 ">
-            {select.state !== "sign" ? <GrayBlock /> : null}
+            {language !== "sign" ? <GrayBlock /> : null}
 
-            <BackBtn
-              state={select.state}
-              video={header.img}
-              text={header.text}
-            />
+            <BackBtn video={header.img} text={header.text} />
           </div>
         )}
-        {/* <GrayBlock /> */}
-        {/* <div className="absolute z-10 w-full h-40 bg-darkgreyy top-[350px]"></div> */}
 
         <div className="flex flex-col mb-12 font-circe">
           <div className="w-[90%] mx-auto mt-12 h-20 mb-12 flex font-circeb justify-center font-normal text-[45px] ">
@@ -119,8 +99,8 @@ export const Subcatalog: FC = () => {
               <div className="grid grid-cols-2 gap-8 ">
                 <SignCatalogButton
                   route="/discriptionsub"
-                  select={select.state}
                   buttons={buttons}
+                  topic={header?.text}
                 />
               </div>
             </div>

@@ -55,11 +55,7 @@ export const AdditionalPage: FC = () => {
           <div className="relative mb-20">
             {location.state !== "sign" ? <GrayBlock /> : null}
 
-            <BackBtn
-              state={location.state}
-              video={subcatalog.img}
-              text={subcatalog.text}
-            />
+            <BackBtn video={subcatalog.img} text={subcatalog.text} />
           </div>
         )}
 

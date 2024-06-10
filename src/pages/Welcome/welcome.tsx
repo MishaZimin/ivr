@@ -19,10 +19,10 @@ export const Welcome: FC = () => {
         </div> */}
 
         <div className="absolute flex flex-col right-4 top-16 w-[50%]">
-          <h1 className="mb-6 text-[65px] font-circe font-extrabold z-80 w-[70%] ml-[15%]">
+          <h1 className="mb-6 text-[65px] font-circe font-extrabold z-80 w-[70%] ml-[17%]">
             Здесь
           </h1>
-          <h2 className="mb-6 text-[65px] font-circe font-extrabold z-80 leading-none w-[70%] ml-[15%]">
+          <h2 className="mb-6 text-[65px] font-circe font-extrabold z-80 leading-none w-[70%] ml-[17%]">
             Ты можешь обратиться на языке жестов
           </h2>
         </div>

@@ -5,8 +5,10 @@ import close from "../../app/img/close.png";
 import SearchSymbol from "../../app/img/search-symbol.png";
 import { IoMdClose } from "react-icons/io";
 import { AISearch } from "../ai/ai-search";
+import { useNavigate } from "react-router-dom";
 
 export const Search: FC = () => {
+  const navigate = useNavigate();
   const [search, setSearch] = useState<boolean>(false);
   const [selectedWord, setSelectedWord] = useState<string>("");
 
@@ -15,8 +17,48 @@ export const Search: FC = () => {
     setSearch(search ? false : true);
   };
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (search) setSearch(false);
+    console.log(selectedWord);
+
+    const fetchData = async (url: string) => {
+      try {
+        const response = await fetch("https://pincode-dev.ru/ivr-unt" + url, {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+          },
+        });
+        if (!response.ok) {
+          throw new Error(`err: ${response.status}`);
+        }
+        const result = await response.json();
+        return result;
+      } catch (err) {
+        console.log("err:", err);
+        return "";
+      }
+    };
+
+    const response = await fetchData("/search?info=" + selectedWord);
+    console.log("--selectedWord--", selectedWord);
+
+    if (!response.error) {
+      console.log("---", response.error);
+      const searchData = response.rsl.topic + " " + response.rsl.question;
+
+      console.log("---", searchData);
+
+      navigate("/discriptionsub", {
+        state: {
+          header: "header",
+          video: "video",
+          search: searchData,
+        },
+      });
+    } else {
+      alert("Nothing found by your request");
+    }
   };
 
   const handleCleare = () => {

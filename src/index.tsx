@@ -11,21 +11,24 @@ import { SelectionLanguage } from "./pages/Selection/selection";
 
 import { SearchScreen } from "./pages/Catalog/catalog";
 import { Subcatalog } from "./pages/Subcatalog/subcatalog";
-import { DiscriptionSubcatalog } from "./pages/Dscription/discription";
+import { DiscriptionSubcatalog } from "./pages/Description/description";
 import { AdditionalPage } from "./pages/Additional-inf/additional-inf";
 
 import { ScrollToTop } from "./components/scroll-to-top";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
+import store from "./store/store";
+import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <ScrollToTop />
+  // <React.StrictMode>
+  <BrowserRouter>
+    <ScrollToTop />
+    <Provider store={store}>
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/selection" element={<SelectionLanguage />} />
@@ -36,8 +39,9 @@ root.render(
         <Route path="/discriptionsub" element={<DiscriptionSubcatalog />} />
         <Route path="/additional" element={<AdditionalPage />} />
       </Routes>
-    </BrowserRouter>
-  </React.StrictMode>
+    </Provider>
+  </BrowserRouter>
+  // </React.StrictMode>
 );
 
 reportWebVitals();

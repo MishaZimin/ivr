@@ -1,58 +1,38 @@
-import React, { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 import { SignCatalogButton } from "../../components/catalog-button/catalog-button";
 import { Search } from "../../components/search/search";
 import { useLocation } from "react-router-dom";
-import sign2_1 from "../../app/img/sign2_1.png";
 
 type IBtn = {
   img: string;
   text: string;
-  count: number;
 };
 
 export const SearchScreen: FC = () => {
-  const location = useLocation();
+  const language = localStorage.getItem("language");
+
   const [buttons, setButtons] = useState<IBtn[]>([]);
 
+  const data = JSON.parse(localStorage.getItem("data") || "[]");
+
   useEffect(() => {
-    const buttonsData: IBtn[] = [
-      {
-        img: "https://storage.yandexcloud.net/akhidov-ivr/9.1.mp4",
-        text: "Консультация по паспорту РФ",
-        count: 5,
-      },
-      {
-        img: "https://storage.yandexcloud.net/akhidov-ivr/10.1.mp4",
-        text: "Консультация по ИНН",
-        count: 10,
-      },
-      {
-        img: "https://storage.yandexcloud.net/akhidov-ivr/11.1.mp4",
-        text: "Консультация по загранпаспорту",
-        count: 10,
-      },
-      {
-        img: "https://storage.yandexcloud.net/akhidov-ivr/12.1.mp4",
-        text: "Консультация по водительскому удостоверению",
-        count: 10,
-      },
-      {
-        img: "https://storage.yandexcloud.net/akhidov-ivr/13.1.mp4",
-        text: "Консультация по регистрационному учету",
-        count: 10,
-      },
-      {
-        img: "https://storage.yandexcloud.net/akhidov-ivr/14.1.mp4",
-        text: "Консультация по судимости",
-        count: 10,
-      },
-      {
-        img: "https://storage.yandexcloud.net/akhidov-ivr/15.1.mp4",
-        text: "Консультация по СНИЛС",
-        count: 10,
-      },
-    ];
+    console.log("language:", language);
+    console.log("data:", data);
+
+    const buttonsData: IBtn[] = data.map(
+      language === "sign"
+        ? (item: { topic_video: any; topic: any }) => ({
+            img: item.topic_video,
+            text: item.topic,
+          })
+        : (item: { topic_icon: any; topic: any }) => ({
+            img: item.topic_icon,
+            text: item.topic,
+          })
+    );
+
+    console.log(buttonsData);
 
     setButtons(buttonsData);
   }, []);
@@ -67,11 +47,7 @@ export const SearchScreen: FC = () => {
         </div>
         <div>
           <div className="container grid grid-cols-2 gap-8 mx-auto">
-            <SignCatalogButton
-              route="/subcatalog"
-              select={location.state}
-              buttons={buttons}
-            />
+            <SignCatalogButton route="/subcatalog" buttons={buttons} />
           </div>
         </div>
       </div>
