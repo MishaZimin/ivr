@@ -15,14 +15,14 @@ export const SelectionLanguage: FC = () => {
           <h1 className="mb-16 text-[70px] font-circe font-extrabold text-center ">
             Как бы вы хотели общаться?
           </h1>
-          <div className="flex justify-center gap-40">
+          <div className="flex justify-center gap-28">
             <SelectionButton
-              img={sign2_1}
+              img="https://storage.yandexcloud.net/akhidov-ivr/9.1.mp4"
               text={"На простом языке"}
               route={"/easy"}
             />
             <SelectionButton
-              img={sign2_1}
+              img="https://storage.yandexcloud.net/akhidov-ivr/10.1.mp4"
               text={"На языке жестов"}
               route={"/test"}
             />

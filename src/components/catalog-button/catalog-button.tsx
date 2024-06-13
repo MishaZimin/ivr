@@ -45,7 +45,7 @@ export const SignCatalogButton: FC<ISelection> = ({
               key={index}
               onClick={() => handkeNext(button.text, button.img)}
               style={{ boxShadow: "4px 4px 16px 0px rgba(0, 0, 0, 0.2)" }}
-              className="flex flex-col items-center px-4 py-4 font-bold text-black transition duration-200 transform rounded-[28px] bg-gradient-to-b from-white to-white hover:scale-[1.020]">
+              className="flex flex-col items-center px-4 py-4 font-bold text-black transition duration-200 transform rounded-[28px] bg-gradient-to-b from-white to-white hover:scale-[1.020] ">
               <div className="flex flex-col justify-between pt-8 pb-8 text-[35px] text-center font-circe my-auto">
                 <p>{button.text}</p>
               </div>

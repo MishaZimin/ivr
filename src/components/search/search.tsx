@@ -1,27 +1,31 @@
 import { FC, useState } from "react";
-// import sign2_1 from "../../app/img/sign2_1.png";
-import portrait1 from "../../app/img/portrait1.png";
-import close from "../../app/img/close.png";
-import SearchSymbol from "../../app/img/search-symbol.png";
-import { IoMdClose } from "react-icons/io";
 import { AISearch } from "../ai/ai-search";
 import { useNavigate } from "react-router-dom";
-import { IoCloseOutline } from "react-icons/io5";
-import { IoSearchOutline } from "react-icons/io5";
+import { IoCloseOutline, IoSearchOutline } from "react-icons/io5";
 import { PiUserFocus } from "react-icons/pi";
 
-export const Search: FC = () => {
+interface SearchProps {
+  onSearchUpdate?: (isSearching: boolean) => void;
+}
+
+export const Search: FC<SearchProps> = ({ onSearchUpdate }) => {
   const navigate = useNavigate();
   const [search, setSearch] = useState<boolean>(false);
   const [selectedWord, setSelectedWord] = useState<string>("");
+  const [shake, setShake] = useState<boolean>(false);
 
   const handleAISearch = () => {
+    const newSearchState = !search;
     if (!search) setSelectedWord("");
-    setSearch(search ? false : true);
+    setSearch(newSearchState);
+    if (onSearchUpdate) {
+      onSearchUpdate(newSearchState);
+    }
   };
 
   const handleSearch = async () => {
     if (search) setSearch(false);
+
     console.log(selectedWord);
 
     const fetchData = async (url: string) => {
@@ -60,7 +64,9 @@ export const Search: FC = () => {
         },
       });
     } else {
-      alert("Nothing found by your request");
+      setShake(true);
+      setTimeout(() => setShake(false), 500);
+      // alert("Nothing found by your request");
     }
   };
 
@@ -74,15 +80,23 @@ export const Search: FC = () => {
       : setSelectedWord((prevWord) => prevWord + " " + word);
   };
 
+  // Вызов метода обратного вызова при изменении selectedWord
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedWord(event.target.value);
+  };
+
   return (
     <>
       <div className="mb-40">
-        <div className=" absolute flex flex-row mt-20 justify-between w-[80%] h-16 bg-darkgreyy rounded-full left-[10%] z-20 mx-auto">
+        <div
+          className={`absolute flex flex-row mt-20 justify-between w-[80%] h-16 bg-darkgreyy rounded-full left-[10%] z-20 mx-auto ${
+            shake ? "animate-shake" : ""
+          }`}>
           <input
             className="w-full px-8 text-3xl rounded-[36px] bg-darkgreyy focus:border-redd mr-2"
             placeholder="Найти..."
             value={selectedWord}
-            onChange={(event) => setSelectedWord(event.target.value)}
+            onChange={handleInputChange} // Обновление input и вызов метода обратного вызова
           />
           <div className="flex flex-row w-[18%] justify-end">
             {selectedWord ? (

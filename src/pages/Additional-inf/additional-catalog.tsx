@@ -25,6 +25,13 @@ export const AdditionalCatalog: FC = () => {
   const data = JSON.parse(localStorage.getItem("data") || "[]");
   const [buttons, setButtons] = useState<IBtn[]>([]);
 
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+
+  const handleSearchUpdate = (searchState: boolean) => {
+    setIsSearching(searchState);
+    console.log("Search state updated:", searchState);
+  };
+
   const getAdditionalSignSections = (
     topic: string,
     data: any
@@ -132,27 +139,28 @@ export const AdditionalCatalog: FC = () => {
   return (
     <>
       <div className="flex flex-col bg-white font-circe">
-        <Search />
+        <Search onSearchUpdate={handleSearchUpdate} />
+        <div className={isSearching ? "blur-[2px]" : "blur-none"}>
+          <div className="relative mb-12 ">
+            <GrayBlock />
+            <BackBtn video={""} text={"Дополнителтная информация"} />
+          </div>
 
-        <div className="relative mb-12 ">
-          <GrayBlock />
-          <BackBtn video={""} text={"Дополнителтная информация"} />
-        </div>
-
-        <div className="flex flex-col mb-12 font-circe">
-          {buttons.length > 1 ? (
-            <div className="w-[90%] mx-auto mt-12 h-20 mb-12 flex justify-center font-extrabold text-[45px] ">
-              <h1>Какая у вас жизненная ситуация?</h1>
-            </div>
-          ) : null}
-          <div className={false ? "blur-[2px]" : "blur-none"}>
-            <div className="container mx-auto">
-              <div className="grid grid-cols-2 gap-8 ">
-                <SignCatalogButton
-                  route="/addinf"
-                  buttons={buttons}
-                  topic={header.state.topic}
-                />
+          <div className="flex flex-col mb-12 font-circe">
+            {buttons.length > 1 ? (
+              <div className="w-[90%] mx-auto mt-12 h-20 mb-12 flex justify-center font-extrabold text-[45px] ">
+                <h1>Какая у вас жизненная ситуация?</h1>
+              </div>
+            ) : null}
+            <div className={false ? "blur-[2px]" : "blur-none"}>
+              <div className="container mx-auto">
+                <div className="grid grid-cols-2 gap-8 ">
+                  <SignCatalogButton
+                    route="/addinf"
+                    buttons={buttons}
+                    topic={header.state.topic}
+                  />
+                </div>
               </div>
             </div>
           </div>

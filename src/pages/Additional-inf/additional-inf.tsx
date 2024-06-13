@@ -22,6 +22,13 @@ export const AdditionalPage: FC = () => {
 
   const [discription, setDiscription] = useState<string[]>([]);
 
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+
+  const handleSearchUpdate = (searchState: boolean) => {
+    setIsSearching(searchState);
+    console.log("Search state updated:", searchState);
+  };
+
   const fetchData = async (url: string) => {
     try {
       const response = await fetch("https://pincode-dev.ru/ivr-unt" + url, {
@@ -86,34 +93,36 @@ export const AdditionalPage: FC = () => {
   return (
     <>
       <div className="flex flex-col bg-white font-circe">
-        <Search />
+        <Search onSearchUpdate={handleSearchUpdate} />
 
-        {subcatalog && (
-          <div className="relative mb-20">
-            <BackBtn
-              video={
-                subcatalog.text === "Дополнительная информация"
-                  ? ""
-                  : subcatalog.img
-              }
-              text={subcatalog.text}
-              back={header.state.back}
-            />
+        <div className={isSearching ? "blur-[2px]" : "blur-none"}>
+          {subcatalog && (
+            <div className="relative mb-20">
+              <BackBtn
+                video={
+                  subcatalog.text === "Дополнительная информация"
+                    ? ""
+                    : subcatalog.img
+                }
+                text={subcatalog.text}
+                back={header.state.back}
+              />
+            </div>
+          )}
+
+          {language === "sign" && discriptionVideo && (
+            <div className="mx-auto max-w-[60%] mb-12">
+              <AutoPlayVideo video={discriptionVideo} />
+            </div>
+          )}
+
+          <div className="h-[1px] w-[78%] mx-auto bg-black mb-12"></div>
+
+          <div className="mx-auto w-[83%] text-2xl mb-20">
+            {discription.map((text, index) => (
+              <div key={index}>{text ? <p>{text}</p> : <br />}</div>
+            ))}
           </div>
-        )}
-
-        {language === "sign" && discriptionVideo && (
-          <div className="mx-auto max-w-[60%] mb-12">
-            <AutoPlayVideo video={discriptionVideo} />
-          </div>
-        )}
-
-        <div className="h-[1px] w-[78%] mx-auto bg-black mb-12"></div>
-
-        <div className="mx-auto w-[83%] text-2xl mb-20">
-          {discription.map((text, index) => (
-            <div key={index}>{text ? <p>{text}</p> : <br />}</div>
-          ))}
         </div>
       </div>
     </>

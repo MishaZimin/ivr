@@ -23,6 +23,13 @@ export const Subcatalog: FC = () => {
   const [header, setHeader] = useState<IBtn | null>(null);
   const [buttons, setButtons] = useState<IBtn[]>([]);
 
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+
+  const handleSearchUpdate = (searchState: boolean) => {
+    setIsSearching(searchState);
+    console.log("Search state updated:", searchState);
+  };
+
   const data = JSON.parse(localStorage.getItem("data") || "[]");
 
   const createSections = (
@@ -78,23 +85,25 @@ export const Subcatalog: FC = () => {
   return (
     <>
       <div className="flex flex-col bg-white font-circe">
-        <Search />
+        <Search onSearchUpdate={handleSearchUpdate} />
 
         {header && (
-          <div className="relative mb-12 ">
-            {language !== "sign" ? <GrayBlock /> : null}
+          <div className={isSearching ? "blur-[2px]" : "blur-none"}>
+            <div className="relative mb-12 ">
+              {language !== "sign" ? <GrayBlock /> : null}
 
-            <BackBtn video={header.img} text={header.text} />
+              <BackBtn video={header.img} text={header.text} />
+            </div>
           </div>
         )}
 
         <div className="flex flex-col mb-12 font-circe">
           <div className="w-[90%] mx-auto mt-12 h-20 mb-12 flex font-circeb justify-center font-normal text-[45px] ">
-            <h1 className={false ? "blur-[2px]" : "blur-none"}>
+            <h1 className={isSearching ? "blur-[2px]" : "blur-none"}>
               Какая у вас жизненная ситуация?
             </h1>
           </div>
-          <div className={false ? "blur-[2px]" : "blur-none"}>
+          <div className={isSearching ? "blur-[2px]" : "blur-none"}>
             <div className="container mx-auto">
               <div className="grid grid-cols-2 gap-8 ">
                 <SignCatalogButton

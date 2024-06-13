@@ -11,7 +11,7 @@ export const AutoPlayVideo: React.FC<VideoPlayerProps> = ({ video }) => {
 
   useEffect(() => {
     const videoElement = videoRef.current;
-    console.log(videoElement);
+
     const handleCanPlay = () => {
       setLoading(false);
     };
@@ -22,7 +22,7 @@ export const AutoPlayVideo: React.FC<VideoPlayerProps> = ({ video }) => {
           if (entry.isIntersecting) {
             if (videoElement.paused) {
               videoElement.play().catch((error) => {
-                // console.error("Failed to play video:", error);
+                console.error("error", error);
               });
             }
           } else {
@@ -53,11 +53,11 @@ export const AutoPlayVideo: React.FC<VideoPlayerProps> = ({ video }) => {
   }, []);
 
   return (
-    <div className="relative inline-block mt-2">
+    <div className="relative mt-2">
       {loading && (
-        <div className="absolute inset-0 flex items-center justify-center text-lg text-white bg-black gradient-loader bg-opacity-20 rounded-2xl">
+        <div className="absolute inset-0 flex items-center justify-center text-lg text-white bg-white gradient-loader bg-opacity-20 rounded-2xl">
           <img
-            className="h-full"
+            className="justify-center h-full"
             src="https://media.tenor.com/-NoKc-auITEAAAAM/loading-buffering.gif"
             alt="loader"
           />

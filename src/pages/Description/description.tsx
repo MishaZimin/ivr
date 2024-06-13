@@ -20,6 +20,13 @@ export const DiscriptionSubcatalog: FC = () => {
   const [discription, setDiscription] = useState<string[]>([]);
   const [topic, setTopic] = useState<string>("");
 
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+
+  const handleSearchUpdate = (searchState: boolean) => {
+    setIsSearching(searchState);
+    console.log("Search state updated:", searchState);
+  };
+
   const fetchData = async (url: string) => {
     try {
       const response = await fetch("https://pincode-dev.ru/ivr-unt" + url, {
@@ -89,28 +96,29 @@ export const DiscriptionSubcatalog: FC = () => {
 
   return (
     <div className="flex flex-col bg-white font-circe">
-      <Search />
+      <Search onSearchUpdate={handleSearchUpdate} />
 
-      <div className="mb-20 ">
-        {subcatalog && (
-          <BackBtn video={subcatalog.img} text={subcatalog.text} />
-        )}
-      </div>
-
-      {language === "sign" && discriptionVideo && (
-        <div className="mx-auto max-w-[60%] mb-20">
-          <AutoPlayVideo video={discriptionVideo} />
+      <div className={isSearching ? "blur-[2px]" : "blur-none"}>
+        <div className="mb-20 ">
+          {subcatalog && (
+            <BackBtn video={subcatalog.img} text={subcatalog.text} />
+          )}
         </div>
-      )}
-      <div className="h-[1px] w-[78%] mx-auto bg-black mb-10"></div>
-      <div className="mx-auto w-[83%] text-2xl mb-20">
-        {discription.map((text, index) => (
-          <div key={index}>{text ? <p>{text}</p> : <br />}</div>
-        ))}
-      </div>
-      {}
-      <div className="w-full">
-        <AdditionalInf topic={topic} />
+        {language === "sign" && discriptionVideo && (
+          <div className="mx-auto max-w-[60%] mb-20">
+            <AutoPlayVideo video={discriptionVideo} />
+          </div>
+        )}
+        <div className="h-[1px] w-[78%] mx-auto bg-black mb-10"></div>
+        <div className="mx-auto w-[83%] text-2xl mb-20">
+          {discription.map((text, index) => (
+            <div key={index}>{text ? <p>{text}</p> : <br />}</div>
+          ))}
+        </div>
+        {}
+        <div className="w-full">
+          <AdditionalInf topic={topic} />
+        </div>
       </div>
     </div>
   );

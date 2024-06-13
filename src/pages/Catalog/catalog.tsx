@@ -14,11 +14,20 @@ type IBtn = {
 
 export const SearchScreen: FC = () => {
   const language = localStorage.getItem("language");
-  const navigate = useNavigate();
+
   const [buttons, setButtons] = useState<IBtn[]>([]);
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+
+  const handleSearchUpdate = (searchState: boolean) => {
+    setIsSearching(searchState);
+    console.log("Search state updated:", searchState);
+  };
 
   const data = JSON.parse(localStorage.getItem("data") || "[]");
+
   useEffect(() => {
+    console.log("isSearching", isSearching);
+
     const buttonsData: IBtn[] = data.map(
       language === "sign"
         ? (item: { topic_video: any; topic: any }) => ({
@@ -39,15 +48,17 @@ export const SearchScreen: FC = () => {
   return (
     <div className="flex flex-col bg-white font-circe">
       <MiniBackBtn />
-      <Search />
+      <Search onSearchUpdate={handleSearchUpdate} />
 
-      <div className="flex flex-col mb-12">
-        <div className="w-[90%] mx-auto mt-12 h-20 mb-12 flex justify-center font-normal text-[45px] font-circeb">
-          <h1>По какому вопросу ваше обращение?</h1>
-        </div>
-        <div>
-          <div className="container grid grid-cols-2 gap-8 mx-auto">
-            <SignCatalogButton route="/subcatalog" buttons={buttons} />
+      <div className={isSearching ? "blur-[2px]" : "blur-none"}>
+        <div className="flex flex-col mb-12">
+          <div className="w-[90%] mx-auto mt-12 h-20 mb-12 flex justify-center font-normal text-[45px] font-circeb">
+            <h1>По какому вопросу ваше обращение?</h1>
+          </div>
+          <div>
+            <div className={`container grid grid-cols-2 gap-8 mx-auto`}>
+              <SignCatalogButton route="/subcatalog" buttons={buttons} />
+            </div>
           </div>
         </div>
       </div>
