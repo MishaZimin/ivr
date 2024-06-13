@@ -1,8 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { FC, useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import { SignCatalogButton } from "../../components/catalog-button/catalog-button";
 import { Search } from "../../components/search/search";
 import { useLocation } from "react-router-dom";
+import { IoChevronBackOutline } from "react-icons/io5";
+import { MiniBackBtn } from "../../components/btn/mini-back-btn";
 
 type IBtn = {
   img: string;
@@ -11,15 +14,11 @@ type IBtn = {
 
 export const SearchScreen: FC = () => {
   const language = localStorage.getItem("language");
-
+  const navigate = useNavigate();
   const [buttons, setButtons] = useState<IBtn[]>([]);
 
   const data = JSON.parse(localStorage.getItem("data") || "[]");
-
   useEffect(() => {
-    console.log("language:", language);
-    console.log("data:", data);
-
     const buttonsData: IBtn[] = data.map(
       language === "sign"
         ? (item: { topic_video: any; topic: any }) => ({
@@ -32,13 +31,14 @@ export const SearchScreen: FC = () => {
           })
     );
 
-    console.log(buttonsData);
+    // console.log(buttonsData);
 
     setButtons(buttonsData);
   }, []);
 
   return (
     <div className="flex flex-col bg-white font-circe">
+      <MiniBackBtn />
       <Search />
 
       <div className="flex flex-col mb-12">

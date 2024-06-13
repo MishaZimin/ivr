@@ -6,6 +6,9 @@ import SearchSymbol from "../../app/img/search-symbol.png";
 import { IoMdClose } from "react-icons/io";
 import { AISearch } from "../ai/ai-search";
 import { useNavigate } from "react-router-dom";
+import { IoCloseOutline } from "react-icons/io5";
+import { IoSearchOutline } from "react-icons/io5";
+import { PiUserFocus } from "react-icons/pi";
 
 export const Search: FC = () => {
   const navigate = useNavigate();
@@ -76,35 +79,32 @@ export const Search: FC = () => {
       <div className="mb-40">
         <div className=" absolute flex flex-row mt-20 justify-between w-[80%] h-16 bg-darkgreyy rounded-full left-[10%] z-20 mx-auto">
           <input
-            className="w-[85%] px-8 text-3xl rounded-[36px] bg-darkgreyy focus:border-redd mr-2"
+            className="w-full px-8 text-3xl rounded-[36px] bg-darkgreyy focus:border-redd mr-2"
             placeholder="Найти..."
             value={selectedWord}
             onChange={(event) => setSelectedWord(event.target.value)}
           />
-          <div className="flex flex-row w-[15%] justify-end">
-            <button
-              onClick={handleCleare}
-              className="flex my-auto pr-0 mr-0 justify-end transition duration-200 transform hover:scale-105 w-[25%]">
-              <img className="h-6 mx-auto" src={close} alt="close" />
-            </button>
+          <div className="flex flex-row w-[18%] justify-end">
+            {selectedWord ? (
+              <button
+                onClick={handleCleare}
+                className="flex my-auto pr-0 mr-0 justify-end transition duration-200 transform hover:scale-105 w-[25%]">
+                <IoCloseOutline className="h-[50px] w-[50px] opacity-20 mx-auto" />
+              </button>
+            ) : (
+              <div className="w-[50px]"></div>
+            )}
+
             <button
               onClick={handleSearch}
-              className="flex my-auto pr-0 justify-end transition duration-200 transform hover:scale-105 w-[25%]">
-              <img
-                className="h-8 mx-auto"
-                src={SearchSymbol}
-                alt="SearchSymbol"
-              />
+              className="flex justify-end pr-0 my-auto transition duration-200 transform hover:scale-105">
+              <IoSearchOutline className="h-[43px] w-[43px] opacity-20 mx-auto" />
             </button>
 
             <button
               onClick={handleAISearch}
-              className="flex justify-center m-2 bg-white rounded-full hover:scale-105 transition duration-200 transform w-[50%]">
-              <img
-                className="h-8 p-1 my-auto"
-                src={portrait1}
-                alt="SearchSymbol"
-              />
+              className="flex  mr-[9px] justify-center m-2 bg-white rounded-full hover:scale-105 transition duration-200 transform w-[80px]">
+              <PiUserFocus className="my-auto h-[35px] w-[35px]" />
             </button>
           </div>
         </div>
@@ -113,7 +113,7 @@ export const Search: FC = () => {
             <AISearch
               onWordSelect={handleWordSelection}
               onHeader="Покажите ваш запрос"
-              onHeaderStyles="text-[50px] text-normal mx-auto font-circeb"
+              onHeaderStyles="text-[50px] mb-0 text-normal mx-auto font-circeb"
             />
           </div>
         ) : null}

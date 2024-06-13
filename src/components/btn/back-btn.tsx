@@ -8,21 +8,24 @@ import { AutoPlayVideo } from "../../components/sign-video/sign-video";
 interface IBackBtn {
   video: string;
   text: string;
+  back?: number;
 }
 
-export const BackBtn: FC<IBackBtn> = ({ video, text }) => {
+export const BackBtn: FC<IBackBtn> = ({ video, text, back }) => {
   const navigate = useNavigate();
   const language = localStorage.getItem("language");
-
+  console.log(video);
   const handleBack = () => {
-    navigate(-1);
+    console.log(back);
+
+    back ? navigate(-2) : navigate(-1);
   };
 
   return (
     <>
       <div className={false ? "blur-[2px]" : "blur-none"}>
         <button
-          style={{ boxShadow: "4px 4px 12px 0px rgba(0, 0, 0, 0.25)" }}
+          style={{ boxShadow: "4px 4px 16px 0px rgba(0, 0, 0, 0.2)" }}
           onClick={handleBack}
           className={`flex flex-row justify-between min-h-[150px] relative w-[90%] mt-16 mx-auto  px-4 py-4 font-bold text-black transition duration-200 transform rounded-[25px] ${language !== "sign" ? "bg-gradient-to-b from-lightred2 to-white" : "bg-white"}  hover:scale-[1.015] shadow-xl `}>
           <img
@@ -30,9 +33,10 @@ export const BackBtn: FC<IBackBtn> = ({ video, text }) => {
             src={return1}
             alt="return1"
           />
-          {video ? (
+
+          {video && video !== null && video !== "default_image_url" ? (
             language === "sign" ? (
-              <div className="w-1/2 h-full pl-24 my-auto">
+              <div className="w-7/12 h-full pl-24 my-auto">
                 <AutoPlayVideo video={video} />
               </div>
             ) : (
@@ -43,7 +47,7 @@ export const BackBtn: FC<IBackBtn> = ({ video, text }) => {
             )
           ) : null}
 
-          <div className="flex flex-col w-full justify-between  pl-20 pr-24 pt-4  text-[45px] text-left">
+          <div className="flex flex-col w-full justify-between pl-20 pr-24  text-[45px] text-left my-auto">
             <p>{text}</p>
           </div>
         </button>

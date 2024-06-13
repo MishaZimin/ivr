@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import { MiniBackBtn } from "../../components/btn/mini-back-btn";
 export const Successfully: FC = () => {
   const navigate = useNavigate();
 
@@ -12,7 +12,9 @@ export const Successfully: FC = () => {
   return (
     <>
       <div className="flex h-screen ">
-        <div className="flex flex-col mx-auto my-auto bg-greyy px-8 py-12 rounded-[25px] text-center font-circe w-[30%]">
+        <MiniBackBtn />
+
+        <div className="flex flex-col mx-auto my-auto bg-greyy px-8 py-12 rounded-[25px] text-center font-circe w-[30%] ">
           <h1 className="font-extrabold text-[30px] mb-1">Успешно!</h1>
           <p className=" font-normal text-[25px] mb-6">
             Теперь вы можете использовать поиск жестами

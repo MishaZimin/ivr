@@ -39,26 +39,26 @@ export const SelectionButton: FC<ISelectionButton> = ({ img, text, route }) => {
     }
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     console.log(route);
     switch (route) {
       case "/easy":
         console.log("sl");
 
-        fetchData("/get-sl-sections");
+        await fetchData("/get-sl-sections");
         localStorage.setItem("language", "text");
         navigate("/catalog");
         break;
       case "/test":
         console.log("rsl");
 
-        fetchData("/get-rsl-sections");
+        await fetchData("/get-rsl-sections");
         localStorage.setItem("language", "sign");
 
         navigate(route);
         break;
       default:
-        fetchData("/get-rsl-sections");
+        await fetchData("/get-rsl-sections");
         localStorage.setItem("language", "sign");
 
         navigate(route);

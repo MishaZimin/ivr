@@ -13,6 +13,7 @@ import { SearchScreen } from "./pages/Catalog/catalog";
 import { Subcatalog } from "./pages/Subcatalog/subcatalog";
 import { DiscriptionSubcatalog } from "./pages/Description/description";
 import { AdditionalPage } from "./pages/Additional-inf/additional-inf";
+import { AdditionalCatalog } from "./pages/Additional-inf/additional-catalog";
 
 import { ScrollToTop } from "./components/scroll-to-top";
 import reportWebVitals from "./reportWebVitals";
@@ -37,7 +38,8 @@ root.render(
         <Route path="/catalog" element={<SearchScreen />} />
         <Route path="/subcatalog" element={<Subcatalog />} />
         <Route path="/discriptionsub" element={<DiscriptionSubcatalog />} />
-        <Route path="/additional" element={<AdditionalPage />} />
+        <Route path="/addinf" element={<AdditionalPage />} />
+        <Route path="/addcat" element={<AdditionalCatalog />} />
       </Routes>
     </Provider>
   </BrowserRouter>

@@ -5,45 +5,82 @@ import { Search } from "../../components/search/search";
 import { BackBtn } from "../../components/btn/back-btn";
 import { AutoPlayVideo } from "../../components/sign-video/sign-video";
 import Rectangle_3 from "../../app/img/Rectangle_3.png";
-
 import { GrayBlock } from "../../components/gray-block/gray-block";
 
 type Subcatalog = {
   img: string;
   text: string;
-  count: number;
 };
 
 export const AdditionalPage: FC = () => {
   const navigate = useNavigate();
-  const location = useLocation();
+  const header = useLocation();
+  const language = localStorage.getItem("language");
 
   const [subcatalog, setSubcatalog] = useState<Subcatalog | null>(null);
   const [discriptionVideo, setDiscriptionVideo] = useState<string>("");
 
   const [discription, setDiscription] = useState<string[]>([]);
 
+  const fetchData = async (url: string) => {
+    try {
+      const response = await fetch("https://pincode-dev.ru/ivr-unt" + url, {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+        },
+      });
+      if (!response.ok) {
+        throw new Error(`err: ${response.status}`);
+      }
+      const result = await response.json();
+      console.log(result);
+      return result;
+    } catch (err) {
+      console.log("err:", err);
+      return null;
+    }
+  };
+
   useEffect(() => {
-    const subcatalogData: Subcatalog = {
-      img: "https://storage.yandexcloud.net/akhidov-ivr/9.1.mp4",
-      text: "Дополнительная информация",
-      count: 10,
+    const loadData = async () => {
+      console.log("search", header.state.search);
+
+      const url =
+        language === "sign"
+          ? "/get-description?info="
+          : "/get-description-sl?info=";
+
+      const data = await fetchData(url + header.state.search);
+
+      // setTopic(data.topic);
+
+      const subcatalogData: any = {
+        // img:
+        //   language === "sign"
+        //     ? data.description_video
+        //     : data.description_video_sl,
+        img: language === "sign" ? data.full_video : "",
+        text: language === "sign" ? data.question : data.question_sl,
+      };
+
+      const discriptionVideoData = language === "sign" ? data.full_video : "";
+
+      function splitString(input: string): string[] {
+        return input ? input.split("\n") : [];
+      }
+
+      const discriptionData = splitString(
+        language === "sign" ? data.description : data.description_sl
+      );
+      console.log("1", discriptionVideoData);
+
+      setSubcatalog(subcatalogData);
+      setDiscriptionVideo(discriptionVideoData);
+      setDiscription(discriptionData);
     };
-    const discriptionVideoData =
-      "https://storage.yandexcloud.net/akhidov-ivr/9.1.mp4";
 
-    const discriptionData = [
-      "Госпошлина",
-      "",
-      "За выдачу российского национального водительского удостоверения размер государственной пошлины составляет 2000 рублей.",
-      "",
-      "За выдачу международного водительского удостоверения составляет 1600 рублей",
-    ];
-
-    setSubcatalog(subcatalogData);
-    setDiscriptionVideo(discriptionVideoData);
-
-    setDiscription(discriptionData);
+    loadData();
   }, []);
 
   return (
@@ -53,16 +90,20 @@ export const AdditionalPage: FC = () => {
 
         {subcatalog && (
           <div className="relative mb-20">
-            {location.state !== "sign" ? <GrayBlock /> : null}
-
-            <BackBtn video={subcatalog.img} text={subcatalog.text} />
+            <BackBtn
+              video={
+                subcatalog.text === "Дополнительная информация"
+                  ? ""
+                  : subcatalog.img
+              }
+              text={subcatalog.text}
+              back={header.state.back}
+            />
           </div>
         )}
 
-        {/* <div className="absolute z-10 w-full h-40 bg-darkgreyy top-[350px]"></div> */}
-
-        {location.state === "sign" && discriptionVideo && (
-          <div className="mx-auto max-w-[65%] mb-12">
+        {language === "sign" && discriptionVideo && (
+          <div className="mx-auto max-w-[60%] mb-12">
             <AutoPlayVideo video={discriptionVideo} />
           </div>
         )}

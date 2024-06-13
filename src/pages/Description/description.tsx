@@ -18,6 +18,7 @@ export const DiscriptionSubcatalog: FC = () => {
   const [subcatalog, setSubcatalog] = useState<Subcatalog | null>(null);
   const [discriptionVideo, setDiscriptionVideo] = useState<string>("");
   const [discription, setDiscription] = useState<string[]>([]);
+  const [topic, setTopic] = useState<string>("");
 
   const fetchData = async (url: string) => {
     try {
@@ -50,12 +51,14 @@ export const DiscriptionSubcatalog: FC = () => {
       const data = await fetchData(url + header.state.search);
 
       if (data) {
-        console.log("data: ", data);
+        console.log("description: ", data);
 
         console.log("topic: ", data.topic);
         console.log("question: ", data.question);
         console.log("description: ", data.description_sl);
       }
+
+      setTopic(data.topic);
 
       const subcatalogData: Subcatalog = {
         // img:
@@ -67,18 +70,6 @@ export const DiscriptionSubcatalog: FC = () => {
       };
 
       const discriptionVideoData = language === "sign" ? data.full_video : "";
-
-      // const discriptionData = [
-      //   "Подать заявление на оформление паспорта подостижению 14 лет можно на следующий день после наступления события.",
-      //   "",
-      //   "Для этого Вам потребуется:",
-      //   "- 2 личные фотографии 3,5 на 4,5 см матовые на белом фоне в цветном или чёрно-беломисполнении",
-      //   "",
-      //   "- Свидетельство о рождении заявителя;",
-      //   "- Документ подтверждающий наличие гражданства РФ;",
-      //   "- Документ, подтверждающий регистрацию по месту жительства несовершеннолетнего при наличии",
-      //   "- Госпошлина 300 р, оплачивается в МФЦНесовершеннолетний гражданин приходит лично",
-      // ];
 
       function splitString(input: string): string[] {
         return input ? input.split("\n") : [];
@@ -94,7 +85,7 @@ export const DiscriptionSubcatalog: FC = () => {
     };
 
     loadData();
-  }, []);
+  }, [header.state.search, language]);
 
   return (
     <div className="flex flex-col bg-white font-circe">
@@ -106,12 +97,12 @@ export const DiscriptionSubcatalog: FC = () => {
         )}
       </div>
 
-      {language === "sign" && (
-        <div className="mx-auto max-w-[55%] mb-12">
+      {language === "sign" && discriptionVideo && (
+        <div className="mx-auto max-w-[60%] mb-20">
           <AutoPlayVideo video={discriptionVideo} />
         </div>
       )}
-      <div className="h-[1px] w-[78%] mx-auto bg-black mb-8"></div>
+      <div className="h-[1px] w-[78%] mx-auto bg-black mb-10"></div>
       <div className="mx-auto w-[83%] text-2xl mb-20">
         {discription.map((text, index) => (
           <div key={index}>{text ? <p>{text}</p> : <br />}</div>
@@ -119,7 +110,7 @@ export const DiscriptionSubcatalog: FC = () => {
       </div>
       {}
       <div className="w-full">
-        <AdditionalInf />
+        <AdditionalInf topic={topic} />
       </div>
     </div>
   );

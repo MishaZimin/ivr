@@ -2,8 +2,9 @@ import { useState, useEffect, FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AIWebcam } from "../../components/ai/ai-webcam";
 import { Search } from "../../components/search/search";
-
+import { MiniBackBtn } from "../../components/btn/mini-back-btn";
 import { AISearch } from "../../components/ai/ai-search";
+import { IoIosArrowForward } from "react-icons/io";
 
 export const TestWebcam: FC = () => {
   const navigate = useNavigate();
@@ -16,6 +17,8 @@ export const TestWebcam: FC = () => {
   return (
     <>
       <div className="flex h-screen ">
+        <MiniBackBtn />
+
         <div className="flex flex-col w-[70%] pb-8 mx-auto my-auto">
           <AISearch
             onWordSelect={handleWordSelection}
@@ -26,7 +29,7 @@ export const TestWebcam: FC = () => {
         <Link
           className="absolute bg-white text-[25px] font-normal bottom-1/2 right-12 font-circe"
           to="/successfully">
-          next
+          <IoIosArrowForward className="h-16" />
         </Link>
       </div>
     </>

@@ -3,20 +3,21 @@ import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 
-export const AdditionalInf: FC = () => {
+export const AdditionalInf = ({ topic }: { topic: any }) => {
   const navigate = useNavigate();
 
   const language = localStorage.getItem("language");
 
   const handleNext = () => {
-    navigate("/additional", { state: language });
+    // catalog or description
+    navigate("/addcat", { state: { topic: topic } });
   };
 
   return (
     <>
       <div className="w-full pb-10 pl-16 pt-14 bg-darkgreyy">
         <button
-          className="font-normal bg-white text-[25px] rounded-md flex flex-row shadow-lg transition duration-200 transform hover:scale-[1.025]"
+          className="font-normal bg-white text-[25px] rounded-xl flex flex-row shadow-lg transition duration-200 transform hover:scale-[1.025]"
           onClick={handleNext}>
           <p className="text-[25px] font-bold font-circe px-4 py-2 bg white">
             Дополнительная информация

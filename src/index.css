@@ -16,3 +16,23 @@
     font-style: normal;
   }
 }
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient-loader {
+  /* background: linear-gradient(270deg, #575757, #454545, #333333, #1f1f1f); */
+  background: linear-gradient(270deg, #ffffff, #ffffff, #ffffff, #ffffff);
+
+  background-size: 800% 800%;
+  animation: gradientAnimation 3s ease infinite;
+}
