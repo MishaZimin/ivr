@@ -22,7 +22,7 @@ export const AutoPlayVideo: React.FC<VideoPlayerProps> = ({ video }) => {
           if (entry.isIntersecting) {
             if (videoElement.paused) {
               videoElement.play().catch((error) => {
-                console.error("error", error);
+                // console.error("error", error);
               });
             }
           } else {
@@ -55,9 +55,9 @@ export const AutoPlayVideo: React.FC<VideoPlayerProps> = ({ video }) => {
   return (
     <div className="relative mt-2">
       {loading && (
-        <div className="absolute inset-0 flex items-center justify-center text-lg text-white bg-white gradient-loader bg-opacity-20 rounded-2xl">
+        <div className="absolute inset-0 flex items-center justify-center text-lg text-white bg-white gradient-loader bg-opacity-20 ">
           <img
-            className="justify-center h-full"
+            className="justify-center h-2/3"
             src="https://media.tenor.com/-NoKc-auITEAAAAM/loading-buffering.gif"
             alt="loader"
           />

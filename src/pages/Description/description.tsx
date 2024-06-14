@@ -10,6 +10,11 @@ type Subcatalog = {
   text: string;
 };
 
+type DescriptionVideoSL = {
+  paragraph: string;
+  attachment_name: string;
+};
+
 export const DiscriptionSubcatalog: FC = () => {
   const header = useLocation();
   const language = localStorage.getItem("language");
@@ -18,6 +23,9 @@ export const DiscriptionSubcatalog: FC = () => {
   const [subcatalog, setSubcatalog] = useState<Subcatalog | null>(null);
   const [discriptionVideo, setDiscriptionVideo] = useState<string>("");
   const [discription, setDiscription] = useState<string[]>([]);
+  const [discriptionVideoSL, setDiscriptionVideoSL] = useState<
+    DescriptionVideoSL[]
+  >([]);
   const [topic, setTopic] = useState<string>("");
 
   const [isSearching, setIsSearching] = useState<boolean>(false);
@@ -57,38 +65,32 @@ export const DiscriptionSubcatalog: FC = () => {
 
       const data = await fetchData(url + header.state.search);
 
-      if (data) {
-        console.log("description: ", data);
-
-        console.log("topic: ", data.topic);
-        console.log("question: ", data.question);
-        console.log("description: ", data.description_sl);
-      }
-
-      setTopic(data.topic);
-
-      const subcatalogData: Subcatalog = {
-        // img:
-        //   language === "sign"
-        //     ? data.description_video
-        //     : data.description_video_sl,
-        img: language === "sign" ? data.full_video : "",
-        text: language === "sign" ? data.question : data.question_sl,
-      };
-
-      const discriptionVideoData = language === "sign" ? data.full_video : "";
-
       function splitString(input: string): string[] {
         return input ? input.split("\n") : [];
       }
+      if (data) {
+        console.log("description", data);
+        setTopic(data.topic);
 
-      const discriptionData = splitString(
-        language === "sign" ? data.description : data.description_sl
-      );
+        const subcatalogData: Subcatalog = {
+          img: language === "sign" ? data.full_video : "",
+          text: language === "sign" ? data.question : data.question_sl,
+        };
 
-      setSubcatalog(subcatalogData);
-      setDiscriptionVideo(discriptionVideoData);
-      setDiscription(discriptionData);
+        const discriptionVideoData = language === "sign" ? data.full_video : "";
+
+        const discriptionData = splitString(
+          language === "sign" ? data.description : data.description_sl
+        );
+
+        setSubcatalog(subcatalogData);
+        setDiscriptionVideo(discriptionVideoData);
+        setDiscription(discriptionData);
+
+        if (language !== "sign") {
+          setDiscriptionVideoSL(data.description_video_sl);
+        }
+      }
     };
 
     loadData();
@@ -111,11 +113,21 @@ export const DiscriptionSubcatalog: FC = () => {
         )}
         <div className="h-[1px] w-[78%] mx-auto bg-black mb-10"></div>
         <div className="mx-auto w-[83%] text-2xl mb-20">
-          {discription.map((text, index) => (
-            <div key={index}>{text ? <p>{text}</p> : <br />}</div>
-          ))}
+          {language === "sign"
+            ? discription.map((text, index) => (
+                <div key={index}>{text ? <p>{text}</p> : <br />}</div>
+              ))
+            : discriptionVideoSL.map((item, index) => (
+                <div key={index} className="flex items-center mb-8 ">
+                  <img
+                    src={`https://storage.yandexcloud.net/akhidov-ivr/${item.attachment_name}`}
+                    alt="icon"
+                    className="mr-8"
+                  />
+                  <p className="text-[30px]">{item.paragraph}</p>
+                </div>
+              ))}
         </div>
-        {}
         <div className="w-full">
           <AdditionalInf topic={topic} />
         </div>

@@ -10,9 +10,14 @@ module.exports = {
           "10%, 30%, 50%, 70%, 90%": { transform: "translateX(-7px)" },
           "20%, 40%, 60%, 80%": { transform: "translateX(7px)" },
         },
+        slidedown: {
+          "0%": { transform: "translateY(0)", opacity: "0.5" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
       },
       animation: {
         shake: "shake 0.7s ease-in",
+        slidedown: "slidedown 0.2s ease-out forwards",
       },
       lineHeight: {
         "extra-relaxed": "1",

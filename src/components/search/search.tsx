@@ -24,7 +24,13 @@ export const Search: FC<SearchProps> = ({ onSearchUpdate }) => {
   };
 
   const handleSearch = async () => {
-    if (search) setSearch(false);
+    if (search) {
+      setSearch(false);
+      const newSearchState = !search;
+      if (onSearchUpdate) {
+        onSearchUpdate(newSearchState);
+      }
+    }
 
     console.log(selectedWord);
 
@@ -66,7 +72,6 @@ export const Search: FC<SearchProps> = ({ onSearchUpdate }) => {
     } else {
       setShake(true);
       setTimeout(() => setShake(false), 500);
-      // alert("Nothing found by your request");
     }
   };
 
@@ -80,7 +85,6 @@ export const Search: FC<SearchProps> = ({ onSearchUpdate }) => {
       : setSelectedWord((prevWord) => prevWord + " " + word);
   };
 
-  // Вызов метода обратного вызова при изменении selectedWord
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedWord(event.target.value);
   };
@@ -96,7 +100,7 @@ export const Search: FC<SearchProps> = ({ onSearchUpdate }) => {
             className="w-full px-8 text-3xl rounded-[36px] bg-darkgreyy focus:border-redd mr-2"
             placeholder="Найти..."
             value={selectedWord}
-            onChange={handleInputChange} // Обновление input и вызов метода обратного вызова
+            onChange={handleInputChange}
           />
           <div className="flex flex-row w-[18%] justify-end">
             {selectedWord ? (
@@ -123,7 +127,7 @@ export const Search: FC<SearchProps> = ({ onSearchUpdate }) => {
           </div>
         </div>
         {search ? (
-          <div className="absolute ml-[10%] w-[80%] top-24 z-10 rounded-xl">
+          <div className="absolute ml-[10%] w-[80%] top-24 z-10 rounded-xl animate-slidedown">
             <AISearch
               onWordSelect={handleWordSelection}
               onHeader="Покажите ваш запрос"
