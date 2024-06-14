@@ -24,8 +24,8 @@ export const DiscriptionSubcatalog: FC = () => {
   const [discriptionVideo, setDiscriptionVideo] = useState<string>("");
   const [discription, setDiscription] = useState<string[]>([]);
   const [discriptionVideoSL, setDiscriptionVideoSL] = useState<
-    DescriptionVideoSL[]
-  >([]);
+    DescriptionVideoSL[] | null
+  >(null);
   const [topic, setTopic] = useState<string>("");
 
   const [isSearching, setIsSearching] = useState<boolean>(false);
@@ -88,7 +88,11 @@ export const DiscriptionSubcatalog: FC = () => {
         setDiscription(discriptionData);
 
         if (language !== "sign") {
-          setDiscriptionVideoSL(data.description_video_sl);
+          if (data.description_video_sl !== null) {
+            setDiscriptionVideoSL(data.description_video_sl);
+          } else {
+            setDiscriptionVideoSL(null);
+          }
         }
       }
     };
@@ -117,16 +121,24 @@ export const DiscriptionSubcatalog: FC = () => {
             ? discription.map((text, index) => (
                 <div key={index}>{text ? <p>{text}</p> : <br />}</div>
               ))
-            : discriptionVideoSL.map((item, index) => (
-                <div key={index} className="flex items-center mb-8 ">
-                  <img
-                    src={`https://storage.yandexcloud.net/akhidov-ivr/${item.attachment_name}`}
-                    alt="icon"
-                    className="mr-8"
-                  />
-                  <p className="text-[30px]">{item.paragraph}</p>
-                </div>
-              ))}
+            : discriptionVideoSL
+              ? discriptionVideoSL.map((item, index) => (
+                  <div key={index} className="flex items-center mb-8">
+                    {item.attachment_name && (
+                      <img
+                        src={`https://storage.yandexcloud.net/akhidov-ivr/${item.attachment_name}`}
+                        alt="icon"
+                        className="mr-8"
+                      />
+                    )}
+                    <p className="text-[30px]">{item.paragraph}</p>
+                  </div>
+                ))
+              : discription.map((text, index) => (
+                  <div key={index}>
+                    {text ? <p className="text-[30px]">{text}</p> : <br />}
+                  </div>
+                ))}
         </div>
         <div className="w-full">
           <AdditionalInf topic={topic} />

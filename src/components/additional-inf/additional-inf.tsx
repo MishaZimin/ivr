@@ -15,7 +15,7 @@ export const AdditionalInf = ({ topic }: { topic: any }) => {
 
   return (
     <>
-      <div className="w-full pb-10 pl-16 pt-14 bg-darkgreyy">
+      <div className="w-full pl-16 mt-24 pt-14 pb-14 bg-darkgreyy">
         <button
           className="font-normal bg-white text-[25px] rounded-xl flex flex-row shadow-lg transition duration-200 transform hover:scale-[1.025]"
           onClick={handleNext}>
